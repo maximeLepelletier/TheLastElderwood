@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhdqnwu4lp5fr"]
+
+[ext_resource type="Script" uid="uid://fecu0p4busd2" path="res://Scripts/upgrade_menu.gd" id="1_11363"]
+[ext_resource type="Texture2D" uid="uid://fbi22pu3v3wt" path="res://Assets/UI/wood_level_up_panel.png" id="1_ltp0x"]
+
+[node name="Upgrade_menu" type="Node2D"]
+script = ExtResource("1_11363")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 605.0
+offset_bottom = 409.0
+alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer"]
+position = Vector2(300, 204.5)
+scale = Vector2(0.38932294, 0.39160156)
+texture = ExtResource("1_ltp0x")
+
+[node name="upgrade_1" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="upgrade_2" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="upgrade_3" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="level_up_label" type="Label" parent="."]
+offset_left = 162.0
+offset_top = 92.0
+offset_right = 454.0
+offset_bottom = 144.0
+theme_override_colors/font_color = Color(0.7036355, 0.8519737, 0, 1)
+theme_override_font_sizes/font_size = 31
+text = "Niveau supérieur !!!"

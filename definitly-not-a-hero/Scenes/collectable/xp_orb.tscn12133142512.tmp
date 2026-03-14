@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjxpxgxbu3536"]
+
+[ext_resource type="Texture2D" uid="uid://81vf3hrd821x" path="res://Assets/sprites/collectable/green_gem.png" id="1_0jkft"]
+[ext_resource type="Script" uid="uid://bbmy332so1v2c" path="res://xp_orb.gd" id="2_68c0q"]
+
+[node name="xp_orb" type="Sprite2D"]
+scale = Vector2(0.46875, 0.46875)
+texture = ExtResource("1_0jkft")
+script = ExtResource("2_68c0q")

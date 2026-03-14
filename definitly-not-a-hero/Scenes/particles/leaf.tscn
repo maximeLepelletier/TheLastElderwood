@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt8dtaicrfu6g"]
+
+[ext_resource type="Texture2D" uid="uid://6e0hlfa0gsae" path="res://Assets/sprites/leaf_white.png" id="1_mxw6c"]
+
+[sub_resource type="Gradient" id="Gradient_c00yn"]
+offsets = PackedFloat32Array(0, 0.881533, 1)
+colors = PackedColorArray(1.85303e-06, 0.426875, 4.81307e-07, 1, 0.709025, 0.7511, 0, 1, 0.704986, 0.518481, 0, 1)
+
+[node name="Leaf" type="CPUParticles2D"]
+position = Vector2(-342, -6)
+amount = 40
+texture = ExtResource("1_mxw6c")
+lifetime = 10.0
+explosiveness = 0.1
+emission_shape = 3
+emission_rect_extents = Vector2(500, 100)
+spread = 70.0
+gravity = Vector2(0, 100)
+initial_velocity_min = 100.0
+initial_velocity_max = 500.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+orbit_velocity_max = 0.01
+scale_amount_min = 0.1
+scale_amount_max = 0.15
+color_initial_ramp = SubResource("Gradient_c00yn")
+hue_variation_min = -1.0
+hue_variation_max = 1.0

@@ -1,0 +1,195 @@
+[gd_scene load_steps=7 format=3 uid="uid://c23058wvff7ev"]
+
+[ext_resource type="Script" uid="uid://e5iarasjqye" path="res://Scripts/SkillTreeController.gd" id="1_agrso"]
+[ext_resource type="Texture2D" uid="uid://bbqho51go3tcu" path="res://Assets/splashart/skilltree revisited.png" id="1_g2hyj"]
+[ext_resource type="Script" uid="uid://bo0tncqmwuxmu" path="res://Scenes/UI/drag_view.gd" id="1_gh4nt"]
+[ext_resource type="PackedScene" uid="uid://yybnq7rija4p" path="res://Scenes/UI/skill_tree_panel.tscn" id="1_ytikp"]
+[ext_resource type="PackedScene" uid="uid://c81oxcaumsnf4" path="res://Scenes/UI/skill_link.tscn" id="2_6aadd"]
+[ext_resource type="PackedScene" uid="uid://cc6bhq7p3ofcc" path="res://Scenes/UI/skill_node.tscn" id="2_g2hyj"]
+
+[node name="SkillTreePage" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 149.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TreeViewport" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -1.0
+offset_top = -3.0
+offset_right = 600.0
+offset_bottom = 893.0
+mouse_filter = 2
+
+[node name="SkillTreePanel" parent="TreeViewport" instance=ExtResource("1_ytikp")]
+visible = false
+z_index = 100
+z_as_relative = false
+layout_mode = 1
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 2.0
+offset_bottom = 4.0
+
+[node name="DragView" type="Control" parent="TreeViewport"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = -721.0
+offset_top = -790.0
+offset_right = 1327.0
+offset_bottom = 2282.0
+script = ExtResource("1_gh4nt")
+
+[node name="Wallpaper" type="TextureRect" parent="TreeViewport/DragView"]
+z_index = -99
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 1536.0
+scale = Vector2(2, 2)
+mouse_filter = 2
+texture = ExtResource("1_g2hyj")
+
+[node name="SkillNode" parent="TreeViewport/DragView" groups=["skill_nodes"] instance=ExtResource("2_g2hyj")]
+layout_mode = 1
+anchor_left = 0.485
+anchor_top = 0.27
+anchor_right = 0.485
+anchor_bottom = 0.27
+offset_left = -0.731323
+offset_top = 0.554932
+offset_right = 49.2689
+offset_bottom = 53.5549
+grow_horizontal = 1
+skill_id = "1"
+
+[node name="Control" parent="TreeViewport/DragView/SkillNode" groups=["Skill_link"] instance=ExtResource("2_6aadd")]
+z_index = -1
+layout_mode = 1
+offset_left = 27.9998
+offset_top = 30.0
+offset_right = -22.0002
+offset_bottom = -23.0
+rotation = 0.785398
+
+[node name="Control2" parent="TreeViewport/DragView/SkillNode" groups=["Skill_link"] instance=ExtResource("2_6aadd")]
+z_index = -1
+layout_mode = 1
+offset_left = 23.0
+offset_top = 24.0
+offset_right = -27.0
+offset_bottom = -29.0
+rotation = 2.35619
+
+[node name="SkillNode2" parent="TreeViewport/DragView" groups=["skill_nodes"] instance=ExtResource("2_g2hyj")]
+layout_mode = 1
+anchor_left = 0.566
+anchor_top = 0.327
+anchor_right = 0.566
+anchor_bottom = 0.327
+offset_left = 0.869995
+offset_top = 0.609863
+offset_right = 50.87
+offset_bottom = 53.6099
+grow_horizontal = 1
+skill_id = "2"
+
+[node name="Control" parent="TreeViewport/DragView/SkillNode2" groups=["Skill_link"] instance=ExtResource("2_6aadd")]
+z_index = -1
+layout_mode = 1
+offset_left = 22.0001
+offset_top = 30.0
+offset_right = -27.9999
+offset_bottom = -23.0
+rotation = 1.5708
+
+[node name="SkillNode3" parent="TreeViewport/DragView" groups=["skill_nodes"] instance=ExtResource("2_g2hyj")]
+layout_mode = 1
+anchor_left = 0.406
+anchor_top = 0.326
+anchor_right = 0.406
+anchor_bottom = 0.326
+offset_left = 0.328369
+offset_top = -0.173645
+offset_right = 50.3284
+offset_bottom = 52.8263
+grow_horizontal = 1
+skill_id = "3"
+
+[node name="Control" parent="TreeViewport/DragView/SkillNode3" groups=["Skill_link"] instance=ExtResource("2_6aadd")]
+z_index = -1
+layout_mode = 1
+offset_left = 48.0
+offset_top = 26.0
+offset_right = 48.0
+offset_bottom = 26.0
+rotation = 1.5708
+
+[node name="SkillNode4" parent="TreeViewport/DragView" groups=["skill_nodes"] instance=ExtResource("2_g2hyj")]
+layout_mode = 1
+anchor_left = 0.567
+anchor_top = 0.399
+anchor_right = 0.567
+anchor_bottom = 0.399
+offset_left = -0.188232
+offset_top = 0.683228
+offset_right = 49.8118
+offset_bottom = 53.6832
+grow_horizontal = 1
+skill_id = "4"
+
+[node name="SkillNode5" parent="TreeViewport/DragView" groups=["skill_nodes"] instance=ExtResource("2_g2hyj")]
+layout_mode = 1
+anchor_left = 0.407
+anchor_top = 0.399
+anchor_right = 0.407
+anchor_bottom = 0.399
+offset_left = -0.763306
+offset_top = -0.271484
+offset_right = 49.2367
+offset_bottom = 52.7285
+grow_horizontal = 1
+skill_id = "4"
+
+[node name="FixedUI" type="Control" parent="TreeViewport"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SkillTreeController" type="Node" parent="."]
+script = ExtResource("1_agrso")
+
+[node name="Ressources" type="Label" parent="."]
+layout_mode = 0
+offset_right = 84.0
+offset_bottom = 101.0
+text = "Gold : 
+GaiaSeed:
+Gem:
+"
+
+[node name="GoldLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 1.0
+offset_right = 88.0
+offset_bottom = 24.0
+text = "0"
+
+[node name="GaiaLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 27.0
+offset_right = 120.0
+offset_bottom = 50.0
+text = "0"
+
+[node name="GemLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 53.0
+offset_right = 84.0
+offset_bottom = 76.0
+text = "0"

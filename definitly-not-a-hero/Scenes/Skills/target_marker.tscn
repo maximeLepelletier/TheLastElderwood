@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbuxiekoyko15"]
+
+[ext_resource type="Texture2D" uid="uid://b8npklddwl76a" path="res://Assets/Simple Shapes/Circle 2.png" id="1_jjpnl"]
+[ext_resource type="Script" uid="uid://br1fkttipvme" path="res://Scenes/Skills/target_marker.gd" id="2_ep67b"]
+
+[node name="target_marker" type="Sprite2D"]
+modulate = Color(1, 0.0745098, 0, 1)
+scale = Vector2(0.0820313, 0.078125)
+texture = ExtResource("1_jjpnl")
+script = ExtResource("2_ep67b")

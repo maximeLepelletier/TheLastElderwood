@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://bdlhhr2lp6lsn"]
+
+[ext_resource type="Script" uid="uid://tpypxedf8edq" path="res://Scripts/player.gd" id="1_kyqiw"]
+[ext_resource type="PackedScene" uid="uid://cxrllc6dllgsq" path="res://Scenes/tower.tscn" id="1_rpqav"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rpqav"]
+radius = 79.3095
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kyqiw"]
+radius = 72.0625
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gntrk"]
+bg_color = Color(0.887025, 0.0906761, 0.206275, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dewec"]
+bg_color = Color(0, 0.894118, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kyqiw"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ixxa"]
+bg_color = Color(0.164706, 0.741176, 0.858824, 1)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+position = Vector2(749, 2336)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_kyqiw")
+
+[node name="Tower" parent="." instance=ExtResource("1_rpqav")]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 28)
+shape = SubResource("CircleShape2D_rpqav")
+debug_color = Color(0.910201, 0.255492, 0.399713, 0.419608)
+
+[node name="hurtbox" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-1, 32)
+collision_layer = 0
+collision_mask = 2
+
+[node name="Zone" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("CircleShape2D_kyqiw")
+
+[node name="LifeBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -206.0
+offset_top = -191.0
+offset_right = 208.0
+offset_bottom = -164.0
+theme_override_styles/background = SubResource("StyleBoxFlat_gntrk")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dewec")
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="ShieldBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -206.0
+offset_top = -220.0
+offset_right = 208.0
+offset_bottom = -193.0
+theme_override_styles/background = SubResource("StyleBoxFlat_kyqiw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5ixxa")
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-741, -2342)
+anchor_mode = 0
+zoom = Vector2(0.4, 0.3)
+
+[node name="Regen_HP" type="Timer" parent="."]
+unique_name_in_owner = true
+autostart = true
+
+[connection signal="timeout" from="Regen_HP" to="." method="_on_regen_hp_timeout"]

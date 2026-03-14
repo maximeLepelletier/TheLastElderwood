@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://duw4qebdd3no2"]
+
+[ext_resource type="Script" uid="uid://cljrgc84obwtl" path="res://Scripts/level_demo.gd" id="1_7nrvs"]
+[ext_resource type="PackedScene" uid="uid://bdlhhr2lp6lsn" path="res://Scenes/Player.tscn" id="1_a63e3"]
+
+[sub_resource type="Curve2D" id="Curve2D_1gg11"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1762, -1317, 0, 0, 0, 0, 1779, 2048, 0, 0, 0, 0, -373, 2033, 0, 0, 0, 0, -383, -1306, 0, 0, 0, 0, 1757, -1312)
+}
+point_count = 5
+
+[node name="Level DEMO" type="Node2D"]
+script = ExtResource("1_7nrvs")
+
+[node name="Player" parent="." instance=ExtResource("1_a63e3")]
+position = Vector2(647, 449)
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_1gg11")
+
+[node name="SpawnCurves" type="PathFollow2D" parent="Path2D"]
+unique_name_in_owner = true
+position = Vector2(1762, -1317)
+rotation = 1.5657444
+
+[node name="HUD" type="CanvasLayer" parent="."]
+offset = Vector2(213.04, 534.76)
+transform = Transform2D(1, 0, 0, 1, 213.04, 534.76)
+
+[node name="Gold_label" type="Label" parent="HUD"]
+anchors_preset = -1
+anchor_left = -0.312
+anchor_top = -0.64000005
+anchor_right = -0.312
+anchor_bottom = -0.64000005
+offset_left = 0.19999695
+offset_top = 6.1035156e-05
+offset_right = 324.2
+offset_bottom = 49.00006
+text = "GOLD
+"
+
+[node name="Exp_label" type="Label" parent="HUD"]
+anchors_preset = -1
+anchor_left = -0.317
+anchor_top = -0.56700003
+anchor_right = -0.317
+anchor_bottom = -0.56700003
+offset_left = 0.19999695
+offset_top = -0.39996338
+offset_right = 250.2
+offset_bottom = 64.60004
+text = "EXP"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="TowerStats" load_steps=2 format=3 uid="uid://d1c5okmpc25av"]
+
+[ext_resource type="Script" uid="uid://djj32jmm2ydxw" path="res://Scripts/tower_stats.gd" id="1_y68uo"]
+
+[resource]
+resource_name = "TowerStats"
+script = ExtResource("1_y68uo")
+stats_base = {
+"bullet_range": 2000,
+"bullet_speed": 1200,
+"damage": 10,
+"damage_per_tick": 1.0,
+"damage_vamp_sting": 2,
+"damage_wood_trunk": 10,
+"fire_rate": 1,
+"fire_rate_vamp_sting": 1,
+"fire_rate_wood_trunk": 1,
+"slow_percent": 0.3,
+"sylv_bomb_damage ": 5,
+"sylv_bomb_multiplicated": false,
+"sylv_bomb_radius": 80,
+"sylv_bomb_range": 1500,
+"sylv_bomb_speed": 1000,
+"sylv_shield_current_hp": 100,
+"sylv_shield_max_hp": 100,
+"sylv_shield_regen": 5,
+"tick_rate": 0.5,
+"trunk_range": 1400,
+"trunk_speed": 400,
+"vamp_sting_heal": 1000,
+"vamp_sting_range": 1800,
+"vamp_sting_speed": 1000
+}

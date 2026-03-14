@@ -1,0 +1,55 @@
+{
+  "skills": [
+	{
+	  "id": 1,
+	  "text": "Augmentation de l'attaque +2%",
+	  "type": "attaque",
+	  "value": 0.02,
+	  "max_stack": 5,
+	  "required_id": [],
+	  "unlock_id": [2, 3],
+	  "icon": "res://Assets/UI/icons/grow_icon.png"
+	},
+	{
+	  "id": 2,
+	  "text": "Augmentation de la vitesse d'attaque +3%",
+	  "type": "attack_speed",
+	  "value": 0.03,
+	  "max_stack": 3,
+	  "required_id": [1],
+	  "unlock_id": [4],
+	  "icon": "res://Assets/UI/icons/stick_icon.png"
+	},
+	{
+	  "id": 3,
+	  "text": "Augmentation de la regeneration passive +5%",
+	  "type": "regen",
+	  "value": 0.05,
+	  "max_stack": 4,
+	  "required_id": [1],
+	  "unlock_id": [],
+	  "icon": "res://Assets/UI/icons/heal_icon.png"
+	}
+	,
+	{
+	  "id": 4,
+	  "text": "Augmentation des HP +5%",
+	  "type": "hp_stat",
+	  "value": 0.05,
+	  "max_stack": 4,
+	  "required_id": [2],
+	  "unlock_id": [],
+	  "icon": "res://Assets/UI/icons/heart_icon.png"
+	},
+	{
+	  "id": 5,
+	  "text": "Augmentation des HP +5%",
+	  "type": "hp_stat",
+	  "value": 0.05,
+	  "max_stack": 4,
+	  "required_id": [5,4],
+	  "unlock_id": [],
+	  "icon": "res://Assets/UI/icons/heart_icon.png"
+	}	
+  ]
+}

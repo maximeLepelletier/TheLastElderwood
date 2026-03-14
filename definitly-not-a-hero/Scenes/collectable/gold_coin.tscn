@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtmffsk51jkdy"]
+
+[ext_resource type="Texture2D" uid="uid://dsmj1i13dyfg2" path="res://Assets/sprites/collectable/fc2118.png" id="1_nasc4"]
+[ext_resource type="Script" uid="uid://dfrdeflpf4fyd" path="res://Scenes/collectable/gold_coin.gd" id="2_3n6ov"]
+
+[node name="gold_coin" type="Sprite2D"]
+scale = Vector2(0.90625, 0.90625)
+texture = ExtResource("1_nasc4")
+script = ExtResource("2_3n6ov")

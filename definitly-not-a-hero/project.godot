@@ -1,0 +1,32 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Definitly not a HERO"
+run/main_scene="uid://duw4qebdd3no2"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://Assets/icon.svg"
+
+[autoload]
+
+Global="*res://Scripts/Global.gd"
+EnemyManager="*res://Scripts/EnemyManager.gd"
+WaveManager="*res://Scripts/wave_manager.gd"
+UpgradeManager="*res://Scripts/upgrade_manager.gd"
+ComboManager="*res://Scripts/combo_manager.gd"
+Events="*res://Scripts/events.gd"
+Gamedata="*res://Scripts/gamedata.gd"
+Playerdata="*res://Scripts/playerdata.gd"
+
+[display]
+
+window/size/viewport_width=600
+window/size/viewport_height=800

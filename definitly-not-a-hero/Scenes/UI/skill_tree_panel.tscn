@@ -1,0 +1,249 @@
+[gd_scene load_steps=10 format=3 uid="uid://yybnq7rija4p"]
+
+[ext_resource type="Script" uid="uid://barec8bhhc4l0" path="res://Scripts/skill_tree_panel.gd" id="1_y2t3y"]
+[ext_resource type="Texture2D" uid="uid://5lc25mb12op6" path="res://Assets/UI/icons/bean_icon.png" id="2_3440g"]
+[ext_resource type="Texture2D" uid="uid://cn2gsfu2yn7by" path="res://Assets/UI/panels/empty panel2.png" id="2_lx0k2"]
+[ext_resource type="FontFile" uid="uid://2r7c436ff0di" path="res://Assets/Fonts/Comical Cartoon.ttf" id="3_yrvfg"]
+[ext_resource type="Texture2D" uid="uid://bdcwymvgwcq7m" path="res://Assets/UI/redborder.png" id="5_1tm4f"]
+[ext_resource type="Texture2D" uid="uid://c4sbd8404gy02" path="res://Assets/sprites/gaia cocoon.png" id="5_lx0k2"]
+[ext_resource type="Texture2D" uid="uid://8vexpw8ta5jv" path="res://Assets/UI/btn/green_button.png" id="6_1tm4f"]
+[ext_resource type="Texture2D" uid="uid://dsmj1i13dyfg2" path="res://Assets/sprites/collectable/fc2118.png" id="7_1tm4f"]
+[ext_resource type="Texture2D" uid="uid://fcm0d4esrt1x" path="res://Assets/UI/btn/red_button.png" id="7_lyi8q"]
+
+[node name="SkillTreePanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y2t3y")
+
+[node name="Dimmer" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 800.0
+color = Color(0, 0, 0, 0.333333)
+
+[node name="BackGround" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = -12.0
+offset_top = 184.0
+offset_right = 589.0
+offset_bottom = 585.0
+mouse_filter = 0
+texture = ExtResource("2_lx0k2")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="icon" type="TextureRect" parent="BackGround"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.5
+offset_top = 126.0
+offset_right = 25.5
+offset_bottom = 176.0
+grow_horizontal = 2
+mouse_filter = 0
+texture = ExtResource("2_3440g")
+expand_mode = 1
+
+[node name="Title" type="Label" parent="BackGround/icon"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -78.0
+offset_right = 145.0
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_yrvfg")
+theme_override_font_sizes/font_size = 6
+text = "dsfsdfsdfdfgdfgdfgfdgfg"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="Progression" type="Label" parent="BackGround/icon"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = 54.0
+offset_right = 129.0
+offset_bottom = 77.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_yrvfg")
+theme_override_font_sizes/font_size = 6
+text = "kjqds flkqjh dhgflkdfg "
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="border" type="TextureRect" parent="BackGround/icon"]
+layout_mode = 0
+offset_left = -6.0
+offset_top = -7.0
+offset_right = 55.0
+offset_bottom = 54.0
+texture = ExtResource("5_1tm4f")
+expand_mode = 1
+
+[node name="ressources" type="Control" parent="BackGround"]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 148.0
+offset_top = 211.0
+offset_right = 453.0
+offset_bottom = 246.0
+
+[node name="GaiaIcon" type="TextureRect" parent="BackGround/ressources"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = -19.5
+offset_right = 81.0
+offset_bottom = 19.5
+grow_vertical = 2
+texture = ExtResource("5_lx0k2")
+expand_mode = 3
+
+[node name="GaiaCostLabel" type="Label" parent="BackGround/ressources"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -223.0
+offset_top = -11.5
+offset_right = -24.0
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_yrvfg")
+theme_override_font_sizes/font_size = 6
+text = "0"
+vertical_alignment = 1
+
+[node name="GoldIcon" type="TextureRect" parent="BackGround/ressources"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 159.0
+offset_top = -19.5
+offset_right = 200.0
+offset_bottom = 19.5
+grow_vertical = 2
+texture = ExtResource("7_1tm4f")
+expand_mode = 3
+
+[node name="GoldCostLabel" type="Label" parent="BackGround/ressources"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -99.0
+offset_top = -11.5
+offset_right = 100.0
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_yrvfg")
+theme_override_font_sizes/font_size = 6
+text = "0"
+vertical_alignment = 1
+
+[node name="Button" type="Control" parent="BackGround"]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 149.0
+offset_top = 260.0
+offset_right = 452.0
+offset_bottom = 316.0
+
+[node name="BuyButton" type="TextureButton" parent="BackGround/Button"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 14.0
+offset_top = -20.0
+offset_right = 124.0
+offset_bottom = 22.0
+grow_vertical = 2
+texture_normal = ExtResource("6_1tm4f")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="BackGround/Button/BuyButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_yrvfg")
+theme_override_font_sizes/font_size = 8
+text = "buy"
+
+[node name="ExitButton" type="TextureButton" parent="BackGround/Button"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -20.0
+offset_bottom = 21.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("7_lyi8q")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="BackGround/Button/ExitButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_yrvfg")
+theme_override_font_sizes/font_size = 8
+text = "EXIT"
+
+[connection signal="pressed" from="BackGround/Button/BuyButton" to="." method="_on_buy_button_pressed"]
+[connection signal="pressed" from="BackGround/Button/ExitButton" to="." method="_on_exit_button_pressed"]

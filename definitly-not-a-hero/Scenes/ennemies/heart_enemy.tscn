@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://by8eh0p283yr6"]
+
+[ext_resource type="Script" uid="uid://crh0equegbe4n" path="res://Scripts/Enemy.gd" id="1_e400n"]
+[ext_resource type="Texture2D" uid="uid://5kq7akfuakyw" path="res://Assets/Simple Shapes/Heart.png" id="2_e07lm"]
+[ext_resource type="PackedScene" uid="uid://dwxyi46apkiag" path="res://Scenes/particles/blood.tscn" id="3_q1ghf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xw0ou"]
+radius = 60.0333
+
+[sub_resource type="Animation" id="Animation_omeaj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6lmlw"]
+resource_name = "hurt"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.266667),
+"transitions": PackedFloat32Array(0.000191549, 0.00257716, 1e-05),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o8kgs"]
+_data = {
+&"RESET": SubResource("Animation_omeaj"),
+&"hurt": SubResource("Animation_6lmlw")
+}
+
+[node name="CircleEnemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_e400n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("CircleShape2D_xw0ou")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-5.96046e-08, 0)
+scale = Vector2(0.253906, 0.263672)
+texture = ExtResource("2_e07lm")
+
+[node name="Enemynode" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_o8kgs")
+}
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="blood" parent="." instance=ExtResource("3_q1ghf")]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

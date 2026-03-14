@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4gifbw6abngf"]
+
+[ext_resource type="Script" uid="uid://dvybcnehkw7qk" path="res://Scripts/lobbymanager.gd" id="1_rm6pd"]
+[ext_resource type="Texture2D" uid="uid://b1nb0jawc7ca4" path="res://Assets/UI/btn/upgrade.png" id="2_wukwe"]
+[ext_resource type="Texture2D" uid="uid://bmymjcrmiu0f3" path="res://Assets/UI/btn/play.png" id="3_hp2pl"]
+[ext_resource type="Texture2D" uid="uid://bpnkmjl8jfe76" path="res://Assets/UI/btn/shop.png" id="4_52yaq"]
+[ext_resource type="Texture2D" uid="uid://ddq8oms36yu0u" path="res://Assets/UI/btn/settings.png" id="5_kgxm8"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchor_right = 1.447
+anchor_bottom = 1.489
+offset_left = -1.0
+offset_top = 2.0
+offset_right = 46.8
+offset_bottom = 43.8
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 602.0
+offset_bottom = 807.0
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_rm6pd")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 1003.0
+offset_right = 909.0
+offset_bottom = 1218.0
+theme_override_constants/separation = 13
+
+[node name="BtnSkills" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_wukwe")
+stretch_mode = 0
+
+[node name="BtnPlay" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_hp2pl")
+
+[node name="BtnShop" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_52yaq")
+
+[node name="BtnSettings" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_kgxm8")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(460, 620)
+zoom = Vector2(0.65, 0.65)

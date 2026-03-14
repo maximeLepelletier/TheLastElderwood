@@ -1,0 +1,39 @@
+{  
+"fire_rate_plus": {"type": "skill_upgrade", "target": "fire_rate", "requires": "bullet", "value": 0.1, "text": "Vitesse de tir +10%"},
+"damage_plus": {"type": "skill_upgrade", "target": "damage", "requires": "bullet", "value": 2, "text": "Dégâts +2"},
+"hp_plus": {"type": "stat", "target": "hp", "value": 50, "text": "Points de vie +20."},
+"regen_plus": {"type": "stat", "target": "regen", "value": 1, "text": "Régénération +0.5/sec."},
+
+"sylv_shield": {   "type": "skill",   "unique": true,   "unlock": ["sylv_shield_tank", "sylv_shield_speed_regen"],   "text": "bouclier sylvestre : un bouclier protegant le gardien."},
+"sylv_shield_tank": {   "type": "skill_upgrade",   "requires": "sylv_shield",   "value": 0.5,   "text": "Dense magie : la valeur max du bouclier augmente de 50%."},
+"sylv_shield_speed_regen": {   "type": "skill_upgrade",   "requires": "sylv_shield",   "value": 0.3,   "text": "Accumulation forcée: le bouclier regenere plus vite ses PV."},
+
+"root_aura": {"type": "skill", "unique": true, "unlock": ["root_damage_up", "root_slow_up"],"text": "Racines épineuses : crée une zone de racines qui ralentit et inflige des dégâts."},
+"root_ aura_super_damage": {	"type": "skill_super", "unique": true,	"requires": "root_ aura",	"value": 2.0 ,	"text": "ca va user les souliers!"},
+"root_damage_up": {  "type": "skill_upgrade",  "available" :3, "requires": "root_aura",  "value": 0.5,  "text": "ronces pointues : dégâts des ronces +50%."},
+"root_slow_up": {  "type": "skill_upgrade",  "available" :2, "requires": "root_aura",  "value": 0.3,  "text": "Sève collante : ralentissement +30%."},
+"root_radius_up": {  "type": "skill_upgrade",  "available" :2, "requires": "root_aura",  "value": 0.1,  "text": "propagation : taille de la zone + 10%."},
+"root_fire_rate_up": {  "type": "skill_upgrade",  "available" :2, "requires": "root_aura",  "value": -0.2,  "text": "virulence : fréquence des degats +20%"},
+
+"vamp_sting": {"type": "skill", "unique": true, "unlock": ["vamp_sting_heal_up", "vamp_sting_speed_up"],"text": "Dard vampirique :  tire un dard vampirique qui soigne le joueur a son retour."},
+"vamp_sting_super": {	"type": "skill_super", "unique": true,	"requires": "vamp_sting",	"value": 3.0 ,	"text": "lance drainante : elle boit jusqu'a plus soif !"},
+"vamp_sting_heal_up": {  "type": "skill_upgrade", "available" :2,   "requires": "vamp_sting",  "value": 0.5,  "text": "Poche de soin : Le dard soigne 50% de plus."},
+"vamp_sting_damage_up": {  "type": "skill_upgrade",  "available" :2, "requires": "vamp_sting",  "value": 0.2,  "text": "Dard vrillé : Le dard inflige 20% de degats en plus."},
+"vamp_sting_fire_rate_up": {  "type": "skill_upgrade", "available" :2,  "requires": "vamp_sting",  "value": 0.15,  "text": "Protubérence réccurente: Les dards sont lancés 15% plus fréquement."},
+"vamp_sting_speed_up": {  "type": "skill_upgrade", "available" :2,  "requires": "vamp_sting",  "value": 0.30,  "text": "Dard propulsé : Vitesse de tir du dard +30%."},
+
+
+"leaf_storm": {  "type": "skill",  "unique": true,  "unlock": ["leaf_storm_damage_up","leaf_storm_dot_up","leaf_storm_duration_up","leaf_storm_width_up"],"text": "Tempête de feuilles : lance une bourrasque de feuilles tranchantes infligeant des dégâts et provoquant un saignement."},
+"leaf_storm_damage_up": {  "type": "skill_upgrade", "available" :2,   "requires": "leaf_storm",  "value": 0.3,  "text": "Feuille acérées : +30% dégâts au feuilles."},
+"leaf_storm_dot_up": {  "type": "skill_upgrade", "available" :2,   "requires": "leaf_storm",  "value": 0.3,  "text": "Plaie béante : saignement +30% de dégats"},
+"leaf_storm_duration_up": {  "type": "skill_upgrade", "available" :1,  "requires": "leaf_storm",  "value": 0.5,  "text": "anti-cyclone vert : les bourasques soufflent 50% plus longtemps."},
+"leaf_storm_dot_time_up": {  "type": "skill_upgrade", "available" :1,  "requires": "leaf_storm",  "value": 0.5,  "text": "Sève anti-coagulante : saignement 50% plus long."},
+"leaf_storm_width_up": {  "type": "skill_upgrade", "available" :2,  "requires": "leaf_storm",  "value": 0.5,  "text": "Automne massif : les bourasques sont 50% plus grandes."},
+
+"wood_trunk": {"type": "skill", "unique": true, "unlock": ["wood_trunk_damage_up", "wood_trunk_speed_up","wood_trunk_size_up","wood_trunk_fire_rate_up"],"text": "Tronc écrasant : lance un tronc qui roule vers les ennemis"},
+"wood_trunk_damage_up": {  "type": "skill_upgrade",  "available" :3, "requires": "wood_trunk",  "value": 0.3,  "text": "Tronc à pointe : augmente les degats du tronc de 30%"},
+"wood_trunk_speed_up": {  "type": "skill_upgrade",  "available" :2, "requires": "wood_trunk",  "value": 0.2,  "text": "Tronc poli :  le tronc roule 20% plus vite sur les ennemis"},
+"wood_trunk_size_up": {  "type": "skill_upgrade",  "available" :1, "requires": "wood_trunk",  "value": 0.5,  "text": "Arbre ancien : le tronc est 50% plus volumineux"},
+"wood_trunk_fire_rate_up": {  "type": "skill_upgrade",  "available" :2, "requires": "wood_trunk",  "value": 0.25,  "text": "déforestation : fréquence d'envoi des tronc reduite de 25%"},
+
+}

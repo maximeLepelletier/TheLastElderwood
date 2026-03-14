@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxrllc6dllgsq"]
+
+[ext_resource type="Script" uid="uid://cnj2i5oqxrstd" path="res://Scripts/tower.gd" id="1_mh5eo"]
+[ext_resource type="Texture2D" uid="uid://b3gnm884b4mf" path="res://Assets/Simple Shapes/Triangle.png" id="2_tghyl"]
+[ext_resource type="Texture2D" uid="uid://bq6suqqc8815w" path="res://Assets/Simple Shapes/Circle.png" id="3_tghyl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mh5eo"]
+radius = 608.2105
+
+[node name="Tower" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_mh5eo")
+
+[node name="AttackRange" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mh5eo")
+
+[node name="WeaponRotation" type="Marker2D" parent="."]
+
+[node name="weapon" type="Sprite2D" parent="WeaponRotation"]
+scale = Vector2(0.5163934, 0.4924406)
+texture = ExtResource("2_tghyl")
+
+[node name="ShootingPoint" type="Marker2D" parent="WeaponRotation/weapon"]
+unique_name_in_owner = true
+position = Vector2(0, -251.807)
+
+[node name="Sprite2D" type="Sprite2D" parent="WeaponRotation/weapon/ShootingPoint"]
+position = Vector2(0, -2.0306816)
+scale = Vector2(0.045386907, 0.047594592)
+texture = ExtResource("3_tghyl")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.35
+autostart = true
+
+[connection signal="draw" from="." to="." method="_on_draw"]

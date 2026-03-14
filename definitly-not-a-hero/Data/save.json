@@ -1,0 +1,26 @@
+{
+  "meta": {
+	"save_version": 1,
+	"game_version": "0.1.0"
+  },
+
+  "progression": {
+	"levels": {
+	  "forest_01": { "stars": 3 },
+	  "forest_02": { "stars": 2 }
+	}
+  },
+
+  "skill_tree": {
+	"nodes": {
+	  "shoot_damage_1": { "level": 3 },
+	  "global_fire_rate": { "level": 1 }
+	}
+  },
+
+  "towers": {
+	"sylvan_tower": {
+	  "unlocked": true
+	}
+  }
+}
