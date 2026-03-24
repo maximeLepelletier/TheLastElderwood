@@ -1,62 +1,60 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxrllc6dllgsq"]
+[gd_scene format=3 uid="uid://cxrllc6dllgsq"]
 
 [ext_resource type="Script" uid="uid://cnj2i5oqxrstd" path="res://Scripts/tower.gd" id="1_mh5eo"]
-[ext_resource type="Texture2D" uid="uid://bte52o7muhs22" path="res://Assets/sprites/targetmarker.png" id="2_ou3m2"]
+[ext_resource type="Texture2D" uid="uid://bte52o7muhs22" path="res://Assets/sprites/UI/targetmarker.png" id="2_ou3m2"]
 [ext_resource type="Texture2D" uid="uid://b3gnm884b4mf" path="res://Assets/Simple Shapes/Triangle.png" id="2_tghyl"]
 [ext_resource type="Texture2D" uid="uid://bq6suqqc8815w" path="res://Assets/Simple Shapes/Circle.png" id="3_tghyl"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tghyl"]
-size = Vector2(1530, 2032)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ou3m2"]
+radius = 3806.0295
 
-[node name="Tower" type="Area2D"]
+[node name="Tower" type="Area2D" unique_id=694032475]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_mh5eo")
 
-[node name="AttackRange" type="CollisionShape2D" parent="."]
-position = Vector2(0, -763)
-shape = SubResource("RectangleShape2D_tghyl")
+[node name="AttackRange" type="CollisionShape2D" parent="." unique_id=564153642]
+shape = SubResource("CircleShape2D_ou3m2")
 
-[node name="targetmarker" type="Sprite2D" parent="AttackRange"]
+[node name="targetmarker" type="Sprite2D" parent="AttackRange" unique_id=457960202]
 unique_name_in_owner = true
 visible = false
 position = Vector2(1, 569)
 scale = Vector2(0.44, 0.43)
 texture = ExtResource("2_ou3m2")
 
-[node name="WeaponRotation" type="Marker2D" parent="."]
+[node name="WeaponRotation" type="Marker2D" parent="." unique_id=2119172606]
 
-[node name="weapon" type="Sprite2D" parent="WeaponRotation"]
-scale = Vector2(0.476563, 0.492441)
+[node name="weapon" type="Sprite2D" parent="WeaponRotation" unique_id=1301363991]
 texture = ExtResource("2_tghyl")
 
-[node name="ShootingPoint" type="Marker2D" parent="WeaponRotation/weapon"]
+[node name="ShootingPoint" type="Marker2D" parent="WeaponRotation/weapon" unique_id=412546977]
 unique_name_in_owner = true
 position = Vector2(0, -251.807)
 
-[node name="Sprite2D" type="Sprite2D" parent="WeaponRotation/weapon"]
+[node name="Sprite2D" type="Sprite2D" parent="WeaponRotation/weapon" unique_id=1454774512]
 position = Vector2(0, -251.807)
 scale = Vector2(0.0491803, 0.0475947)
 texture = ExtResource("3_tghyl")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1829542571]
 unique_name_in_owner = true
 wait_time = 0.6
 autostart = true
 
-[node name="wood_trunk_Timer" type="Timer" parent="."]
+[node name="wood_trunk_Timer" type="Timer" parent="." unique_id=1681456255]
 unique_name_in_owner = true
 wait_time = 4.0
 
-[node name="vamp_sting_Timer" type="Timer" parent="."]
+[node name="vamp_sting_Timer" type="Timer" parent="." unique_id=542302576]
 unique_name_in_owner = true
 wait_time = 2.0
 
-[node name="sylv_bomb_Timer" type="Timer" parent="."]
+[node name="sylv_bomb_Timer" type="Timer" parent="." unique_id=367057290]
 unique_name_in_owner = true
 wait_time = 2.0
 
-[node name="leaf_storm_Timer" type="Timer" parent="."]
+[node name="leaf_storm_Timer" type="Timer" parent="." unique_id=886579563]
 unique_name_in_owner = true
 wait_time = 10.0
 

@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://1ulivlgf6ulm"]
+[gd_scene format=3 uid="uid://1ulivlgf6ulm"]
 
 [ext_resource type="Script" uid="uid://cw68uqgt7utu7" path="res://Scenes/Skills/leaf_storm.gd" id="1_soo8j"]
-[ext_resource type="Texture2D" uid="uid://6e0hlfa0gsae" path="res://Assets/sprites/leaf_white.png" id="1_ttvxd"]
+[ext_resource type="Texture2D" uid="uid://6e0hlfa0gsae" path="res://Assets/sprites/skills/leaf_white.png" id="1_ttvxd"]
 [ext_resource type="Texture2D" uid="uid://daxvtq8uxyafn" path="res://Assets/textures/2.png" id="2_soo8j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_njws7"]
@@ -13,18 +13,18 @@ colors = PackedColorArray(0, 0.334051, 0, 1, 0.537255, 0.709804, 0.160784, 1)
 [sub_resource type="Gradient" id="Gradient_w0xvg"]
 colors = PackedColorArray(0.928746, 0.810855, 0.202349, 1, 0, 0.813116, 0, 1)
 
-[node name="leafStorm" type="Node2D"]
+[node name="leafStorm" type="Node2D" unique_id=1775882387]
+scale = Vector2(2, 2)
 script = ExtResource("1_soo8j")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1050213774]
 collision_layer = 4
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=529762239]
 shape = SubResource("CircleShape2D_njws7")
 
-[node name="leaf_Particle" type="CPUParticles2D" parent="."]
+[node name="leaf_Particle" type="CPUParticles2D" parent="." unique_id=2079627408]
 amount = 30
 texture = ExtResource("1_ttvxd")
 fixed_fps = 60
@@ -47,7 +47,7 @@ scale_amount_min = 0.1
 scale_amount_max = 0.1
 color_initial_ramp = SubResource("Gradient_ssigv")
 
-[node name="trail_Particle" type="CPUParticles2D" parent="."]
+[node name="trail_Particle" type="CPUParticles2D" parent="." unique_id=1701145745]
 texture = ExtResource("2_soo8j")
 lifetime = 3.0
 fixed_fps = 60
@@ -70,7 +70,7 @@ scale_amount_min = 0.2
 scale_amount_max = 0.3
 color_initial_ramp = SubResource("Gradient_w0xvg")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=157698825]
 wait_time = 4.0
 autostart = true
 

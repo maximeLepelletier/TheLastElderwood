@@ -58,17 +58,25 @@ func get_random_choices(count: int = 3) -> Array:
 		if skip_this_upgrade:
 			continue		
 			
-		# -- Bloquer compétences si la base n'esst pas debloquée --
+		# -- Bloquer compétences si la base n'est pas debloquée --
 		if data.has("requires") and not tower.has_skill(data.requires):
-			continue		
+			continue
 		# -- Bloquer compétences uniques déjà prises --
 		if data.has("unique") and data.unique and tower.has_skill(upgrade_id):
-			continue	
+			continue
 		# -- Bloquer les upgrades nécessitant un skill non appris --
 		if data.has("available") and tower.get_upgrade_count(upgrade_id) == data.available: 
-				continue				
+			continue
+		# -- Bloquer compétences si un mode est deja associé a la competence
+		if data.has("target") and data.target=="mode":
+			if tower.get_property("bullet","mode","") != "":
+				continue
+		else:
+			if data.has("mode_skill"):
+				if data.mode_skill != tower.get_property("bullet","mode",""):
+					continue				
+				
 		valid_keys.append(upgrade_id)
-
 	# Mélange 
 	valid_keys.shuffle()
 	valid_super.shuffle()

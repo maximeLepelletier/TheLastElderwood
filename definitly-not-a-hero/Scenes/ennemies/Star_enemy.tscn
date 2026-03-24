@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://ejon80fqicuv"]
+[gd_scene load_steps=9 format=3 uid="uid://ejon80fqicuv"]
 
 [ext_resource type="Script" uid="uid://crh0equegbe4n" path="res://Scripts/Enemy.gd" id="1_vf416"]
 [ext_resource type="Texture2D" uid="uid://c0o7xai6vq3uv" path="res://Assets/Simple Shapes/Srar.png" id="2_vf416"]
 [ext_resource type="PackedScene" uid="uid://dwxyi46apkiag" path="res://Scenes/particles/blood.tscn" id="3_laj8x"]
+[ext_resource type="Texture2D" uid="uid://bq6suqqc8815w" path="res://Assets/Simple Shapes/Circle.png" id="4_uge0y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmmcm"]
-radius = 45.1774
+radius = 169.296
 
 [sub_resource type="Animation" id="Animation_omeaj"]
 length = 0.001
@@ -53,24 +54,26 @@ script = ExtResource("1_vf416")
 position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_jmmcm")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, -1.19209e-07)
-scale = Vector2(0.253906, 0.263672)
 texture = ExtResource("2_vf416")
 
 [node name="SquareEnemynode" type="Node2D" parent="."]
 unique_name_in_owner = true
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="hit_type" parent="." instance=ExtResource("3_laj8x")]
+unique_name_in_owner = true
+position = Vector2(0, -1)
+texture = ExtResource("4_uge0y")
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_o8kgs")
 }
-
-[node name="Timer" type="Timer" parent="."]
-unique_name_in_owner = true
-
-[node name="blood" parent="." instance=ExtResource("3_laj8x")]
-unique_name_in_owner = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

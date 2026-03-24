@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cc6bhq7p3ofcc"]
+[gd_scene format=3 uid="uid://cc6bhq7p3ofcc"]
 
 [ext_resource type="Script" uid="uid://1gywccppneo5" path="res://Scripts/SkillNode.gd" id="1_dbutk"]
 [ext_resource type="Shader" uid="uid://cj0o23mcu13jb" path="res://Scenes/UI/skill_node_icon.gdshader" id="2_cowx8"]
@@ -16,25 +16,26 @@ corner_radius_bottom_left = 50
 shader = ExtResource("2_cowx8")
 shader_parameter/radius_ratio = 0.5
 
-[node name="SkillNode" type="Button"]
+[node name="SkillNode" type="Button" unique_id=260581819]
+z_index = -2
 anchors_preset = -1
 anchor_right = 0.0833333
 anchor_bottom = 0.0625
 grow_horizontal = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_dbutk")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_dbutk")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_dbutk")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_dbutk")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_dbutk")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_dbutk")
-theme_override_styles/hover = SubResource("StyleBoxFlat_dbutk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_dbutk")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_dbutk")
 theme_override_styles/normal = SubResource("StyleBoxFlat_dbutk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dbutk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_dbutk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dbutk")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_dbutk")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_dbutk")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_dbutk")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_dbutk")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_dbutk")
+theme_override_styles/focus = SubResource("StyleBoxFlat_dbutk")
 script = ExtResource("1_dbutk")
 metadata/_edit_use_anchors_ = true
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=756178058]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -47,7 +48,7 @@ offset_right = 25.0
 offset_bottom = 25.0
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="CenterContainer"]
+[node name="Icon" type="TextureRect" parent="CenterContainer" unique_id=1088728274]
 z_as_relative = false
 material = SubResource("ShaderMaterial_x5hwc")
 custom_minimum_size = Vector2(50, 50)
@@ -56,7 +57,7 @@ mouse_filter = 2
 expand_mode = 5
 stretch_mode = 5
 
-[node name="Description" type="Label" parent="."]
+[node name="Description" type="Label" parent="." unique_id=795712028]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -74,7 +75,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="StackedLabel" type="Label" parent="."]
+[node name="StackedLabel" type="Label" parent="." unique_id=1145088919]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -87,7 +88,7 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="LockOverlay" type="ColorRect" parent="."]
+[node name="LockOverlay" type="ColorRect" parent="." unique_id=1614556738]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -102,16 +103,16 @@ offset_bottom = 43.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="border" type="TextureRect" parent="."]
-z_index = -1
+[node name="border" type="TextureRect" parent="." unique_id=327740113]
+z_index = 2
 z_as_relative = false
 material = SubResource("ShaderMaterial_x5hwc")
 custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
+layout_mode = 0
 offset_left = -10.0
-offset_top = -6.0
+offset_top = -5.0
 offset_right = 60.0
-offset_bottom = 58.0
+offset_bottom = 59.0
 mouse_filter = 2
 texture = ExtResource("4_33xaf")
 expand_mode = 1

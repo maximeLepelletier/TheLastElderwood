@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cmhgnxqw70ew8"]
 
 [ext_resource type="Script" uid="uid://bq0iifw0lg6dn" path="res://Scripts/sylv_bomb.gd" id="1_fiwwt"]
-[ext_resource type="Texture2D" uid="uid://b5a3iee3rtajy" path="res://Assets/sprites/sylv_bomb.png" id="2_ce1l7"]
+[ext_resource type="Texture2D" uid="uid://b5a3iee3rtajy" path="res://Assets/sprites/skills/sylv_bomb.png" id="2_ce1l7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n6ur7"]
 radius = 163.441

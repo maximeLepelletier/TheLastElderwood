@@ -14,7 +14,8 @@ var enemy_scenes = {
 	"white_circle_enemy": preload("res://Scenes/ennemies/circle_enemy.tscn"),
 	"white_hexa_enemy": preload("res://Scenes/ennemies/hexa_enemy.tscn"),
 	"white_star_enemy": preload("res://Scenes/ennemies/Star_enemy.tscn"),
-	"white_heart_enemy": preload("res://Scenes/ennemies/heart_enemy.tscn")    
+	"bat": preload("res://Scenes/ennemies/bat.tscn"),
+	"boss1_enemy": preload("res://Scenes/ennemies/boss1_enemy.tscn")        
 }
 #-----------------------------------------
 
@@ -48,12 +49,24 @@ func start_next_wave():
 	current_wave += 1
 
 func spawn_wave(wave_data: Dictionary) -> void:
-	for enemy_info in wave_data["enemies"]:
-		enemies_alive+=enemy_info["count"]
-		for i in range(enemy_info["count"]):
-			await get_tree().create_timer(enemy_info["spawn_delay"]).timeout
-			mob_spawn(enemy_info["type"])
-	print("nombre d'ennemis de la vague :" + str(enemies_alive))
+	if wave_data.has("boss"):
+		Events.next_wave.emit(current_wave+1,true)
+		for enemy_info in wave_data["boss"]:
+			enemies_alive+=enemy_info["count"]
+			for i in range(enemy_info["count"]):
+				await get_tree().create_timer(enemy_info["spawn_delay"],false).timeout
+				mob_spawn(enemy_info["type"])
+		print("nombre d'ennemis de la vague :" + str(enemies_alive))
+	else:
+		Events.next_wave.emit(current_wave+1)
+	if wave_data.has("enemies"):
+		for enemy_info in wave_data["enemies"]:
+			enemies_alive+=enemy_info["count"]
+			for i in range(enemy_info["count"]):
+				await get_tree().create_timer(enemy_info["spawn_delay"],false).timeout
+				mob_spawn(enemy_info["type"])
+		print("nombre d'ennemis de la vague :" + str(enemies_alive))
+	
 
 func mob_spawn(enemy_id: String):		
 	if not enemy_scenes.has(enemy_id):
@@ -71,7 +84,6 @@ func _on_enemy_died() -> void:
 	print("nombre d'ennemi encore en vie : " + str(enemies_alive))
 	Events.enemy_died_signal.emit()
 	if enemies_alive <= 0:
-		Events.next_wave.emit(current_wave+1)
 		await get_tree().create_timer(1.0).timeout
 		start_next_wave()
 

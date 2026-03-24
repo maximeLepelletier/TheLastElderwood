@@ -43,6 +43,9 @@ func animate_bar_to(new_value):
 	var tw = create_tween()
 	tw.tween_property(exp_bar, "value", new_value, 0.4).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
-func set_wave(current_wave):
-	Wave_label.text = "Vague " + str(current_wave)
+func set_wave(current_wave,bosswave:bool = false):
+	if bosswave:
+		Wave_label.text = "!! BOSS !!"
+	else:
+		Wave_label.text = "Vague " + str(current_wave)
 	animator.play("new wave")

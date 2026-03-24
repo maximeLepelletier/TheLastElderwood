@@ -24,3 +24,4 @@ static func get_stat(
 	var mult = multipliers.get(skill, {}).get(stat, 1.0)
 	
 	return StatsCalculator.compute(base, bonus,percent, mult)
+	

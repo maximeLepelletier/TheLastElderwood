@@ -1,27 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://g8t1qw3ojf83"]
+[gd_scene format=3 uid="uid://g8t1qw3ojf83"]
 
 [ext_resource type="Script" uid="uid://dl2m1t05x210s" path="res://Scenes/Skills/root_aura.gd" id="1_xixwl"]
-[ext_resource type="Texture2D" uid="uid://n27fqrs3kw8p" path="res://Assets/sprites/root_area.png" id="2_bg5b2"]
+[ext_resource type="Texture2D" uid="uid://n27fqrs3kw8p" path="res://Assets/sprites/skills/root_area.png" id="2_bg5b2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xcowa"]
-radius = 606.671
+radius = 528.38513
 
-[node name="hurtbox" type="Area2D"]
+[node name="hurtbox" type="Area2D" unique_id=1542828192]
+scale = Vector2(10, 10)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_xixwl")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1350639453]
 shape = SubResource("CircleShape2D_xcowa")
 debug_color = Color(0.830121, 0.321376, 0.590163, 0.419608)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1069459883]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=480351324]
 z_index = -50
-position = Vector2(13, 2)
-scale = Vector2(3.095, 3.135)
+position = Vector2(16.699982, 2)
+scale = Vector2(3, 3)
 texture = ExtResource("2_bg5b2")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

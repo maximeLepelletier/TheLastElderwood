@@ -1,0 +1,100 @@
+[gd_scene load_steps=19 format=3 uid="uid://bugjedfxet6ax"]
+
+[ext_resource type="Script" uid="uid://b8awtq3nwp4i2" path="res://explosion.gd" id="1_maxrd"]
+[ext_resource type="Texture2D" uid="uid://dsuq6sxxgkjq4" path="res://Assets/sprites/animated sprites/explosion/00.png" id="2_pk7se"]
+[ext_resource type="Texture2D" uid="uid://cg5ve30xpamx1" path="res://Assets/sprites/animated sprites/explosion/01.png" id="3_38g5e"]
+[ext_resource type="Texture2D" uid="uid://ci6eqcmdylteo" path="res://Assets/sprites/animated sprites/explosion/02.png" id="4_8dh7p"]
+[ext_resource type="Texture2D" uid="uid://b2obd2d14yeyh" path="res://Assets/sprites/animated sprites/explosion/03.png" id="5_xh2kb"]
+[ext_resource type="Texture2D" uid="uid://b277qk0tsvytl" path="res://Assets/sprites/animated sprites/explosion/04.png" id="6_72dc2"]
+[ext_resource type="Texture2D" uid="uid://b0876bsoct7ev" path="res://Assets/sprites/animated sprites/explosion/05.png" id="7_g15wt"]
+[ext_resource type="Texture2D" uid="uid://dyepahdd8ap34" path="res://Assets/sprites/animated sprites/explosion/06.png" id="8_x20c0"]
+[ext_resource type="Texture2D" uid="uid://c5mxaplbgii83" path="res://Assets/sprites/animated sprites/explosion/07.png" id="9_qaq4b"]
+[ext_resource type="Texture2D" uid="uid://bbvvp6cu5fwuy" path="res://Assets/sprites/animated sprites/explosion/08.png" id="10_2g2yk"]
+[ext_resource type="Texture2D" uid="uid://dbjlllxexh40v" path="res://Assets/sprites/animated sprites/explosion/09.png" id="11_7wkyi"]
+[ext_resource type="Texture2D" uid="uid://0vj64oe3e17o" path="res://Assets/sprites/animated sprites/explosion/10.png" id="12_g8w66"]
+[ext_resource type="Texture2D" uid="uid://dyd6okxiltrqt" path="res://Assets/sprites/animated sprites/explosion/11.png" id="13_hojql"]
+[ext_resource type="Texture2D" uid="uid://b1nn811xeowmy" path="res://Assets/sprites/animated sprites/explosion/12.png" id="14_cvpb3"]
+[ext_resource type="Texture2D" uid="uid://bcekvoik18vjm" path="res://Assets/sprites/animated sprites/explosion/13.png" id="15_ddn0u"]
+[ext_resource type="Texture2D" uid="uid://l7t02gw3thah" path="res://Assets/sprites/animated sprites/explosion/14.png" id="16_830rn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1jt1m"]
+radius = 864.144
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7frd6"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("2_pk7se")
+}, {
+"duration": 0.5,
+"texture": ExtResource("3_38g5e")
+}, {
+"duration": 0.5,
+"texture": ExtResource("4_8dh7p")
+}, {
+"duration": 0.5,
+"texture": ExtResource("5_xh2kb")
+}, {
+"duration": 0.5,
+"texture": ExtResource("6_72dc2")
+}, {
+"duration": 0.5,
+"texture": ExtResource("7_g15wt")
+}, {
+"duration": 0.5,
+"texture": ExtResource("8_x20c0")
+}, {
+"duration": 0.5,
+"texture": ExtResource("9_qaq4b")
+}, {
+"duration": 0.5,
+"texture": ExtResource("10_2g2yk")
+}, {
+"duration": 0.5,
+"texture": ExtResource("11_7wkyi")
+}, {
+"duration": 0.5,
+"texture": ExtResource("12_g8w66")
+}, {
+"duration": 0.5,
+"texture": ExtResource("13_hojql")
+}, {
+"duration": 0.5,
+"texture": ExtResource("14_cvpb3")
+}, {
+"duration": 0.5,
+"texture": ExtResource("15_ddn0u")
+}, {
+"duration": 0.5,
+"texture": ExtResource("16_830rn")
+}],
+"loop": false,
+"name": &"boom",
+"speed": 20.0
+}]
+
+[node name="explosion" type="Node2D"]
+z_index = -10
+script = ExtResource("1_maxrd")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="explosionRadius" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_1jt1m")
+debug_color = Color(0.54765, 0.564566, 0.0156207, 0.42)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="animation" type="AnimatedSprite2D" parent="."]
+z_index = -10
+scale = Vector2(1.2, 1.2)
+sprite_frames = SubResource("SpriteFrames_7frd6")
+animation = &"boom"
+frame = 14
+frame_progress = 1.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="animation_finished" from="animation" to="." method="_on_animation_animation_finished"]

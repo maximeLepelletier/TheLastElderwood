@@ -6,6 +6,7 @@ var wave_panel =self
 var screen_width: float
 var panel_width: float
 
+
 var current_wave = 1
 
 func _ready():	
@@ -14,8 +15,7 @@ func _ready():
 	
 	
 func play_wave_panel():
-	%next_wave_label.text = "VAGUE " + str(current_wave)
-	%next_wave_label.visible = false
+	
 	
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_QUAD)
@@ -62,6 +62,6 @@ func reset_panel_position() -> void:
 	%next_wave_label.visible = false
 	%next_wave_label.modulate.a = 0.0
 
-func set_wave():
+func set_wave(bosswave:bool =false):
 	current_wave+=1
 	play_wave_panel()

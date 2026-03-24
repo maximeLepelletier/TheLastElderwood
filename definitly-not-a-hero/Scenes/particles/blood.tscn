@@ -1,19 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwxyi46apkiag"]
-
-[ext_resource type="Texture2D" uid="uid://bq6suqqc8815w" path="res://Assets/Simple Shapes/Circle.png" id="1_dvdk7"]
+[gd_scene load_steps=2 format=3 uid="uid://dwxyi46apkiag"]
 
 [sub_resource type="Curve" id="Curve_dvdk7"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.47191), -0.576999, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Gradient" id="Gradient_678an"]
-colors = PackedColorArray(1, 0, 0, 1, 0.536538, 0.12316, 0, 1)
-
 [node name="blood" type="CPUParticles2D"]
+position = Vector2(-1, 0)
 rotation = -2.08147
 emitting = false
-amount = 20
-texture = ExtResource("1_dvdk7")
+amount = 15
 lifetime = 0.4
 one_shot = true
 explosiveness = 1.0
@@ -25,5 +20,3 @@ initial_velocity_max = 250.0
 scale_amount_min = 0.03
 scale_amount_max = 0.04
 scale_amount_curve = SubResource("Curve_dvdk7")
-color = Color(0.787542, 4.16331e-06, 5.77569e-07, 1)
-color_ramp = SubResource("Gradient_678an")

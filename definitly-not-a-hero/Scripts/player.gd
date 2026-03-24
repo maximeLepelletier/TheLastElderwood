@@ -1,9 +1,10 @@
 extends CharacterBody2D
 
 #CONSTANTES:
+# 100 / 130 / 170 /290/370/470/600/760/950/1200/1500/1850/2300/2900/3600/4500/5600/7000
 const XP_TABLE = [
-	10, 130, 170, 220, 290,
-	370, 470, 600, 760, 950,
+	10, 50, 50, 50, 50,
+	50, 50, 50, 50, 50,
 	1200, 1500, 1850, 2300, 2900,
 	3600, 4500, 5600, 7000
 ]
@@ -80,7 +81,7 @@ func apply_upgrade(upgrade_id: String):
 		if upgrade_id.begins_with("sylv_shield"):
 			shield_max_hp= Tower.get_stat("sylv_shield","max_hp")
 			shield_current_HP =  Tower.get_stat("sylv_shield","current_HP")
-			shield_regen =  Tower.get_stat("sylv_shield","regen")
+			shield_regen =  Tower.get_stat("sylv_shield","regen")			
 		Tower.upgradeSkill(data.requires,upgrade_id,data.value)
 	if data.type == "skill_super":
 		var base = data.requires

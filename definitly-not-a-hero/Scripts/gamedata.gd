@@ -13,6 +13,7 @@ const SYLV_BOMB = preload("res://Scenes/Skills/sylv_bomb.tscn")
 const SYLV_SHIELD = preload("res://Scenes/Skills/sylv_shield.tscn")
 const ROOT_AURA = preload("res://Scenes/Skills/root_aura.tscn")
 const LEAF_STORM = preload("res://Scenes/Skills/leaf_storm.tscn")
+const EXPLOSION = preload("res://Scenes/Skills/explosion.tscn")
 const MARKER = preload("res://Scenes/Skills/target_marker.tscn")
 
 

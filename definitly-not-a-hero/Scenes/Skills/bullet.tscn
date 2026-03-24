@@ -3,9 +3,8 @@
 [ext_resource type="Script" uid="uid://b2o111dmkpjrm" path="res://Scripts/bullet.gd" id="1_oduel"]
 [ext_resource type="Texture2D" uid="uid://bq6suqqc8815w" path="res://Assets/Simple Shapes/Circle.png" id="2_oduel"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ycag2"]
-radius = 8.0
-height = 110.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_m7umi"]
+radius = 52.0
 
 [node name="Area2D" type="Area2D"]
 top_level = true
@@ -15,10 +14,21 @@ collision_mask = 2
 script = ExtResource("1_oduel")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_ycag2")
+shape = SubResource("CircleShape2D_m7umi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.0413488, 0.220721)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_oduel")
+
+[node name="mode" type="CPUParticles2D" parent="."]
+amount = 1
+lifetime = 5.0
+local_coords = true
+gravity = Vector2(0, 0)
+angular_velocity_min = 120.0
+angular_velocity_max = 120.0
+scale_amount_min = 0.1
+scale_amount_max = 0.1
+color = Color(0.917647, 0.917647, 0.145098, 1)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

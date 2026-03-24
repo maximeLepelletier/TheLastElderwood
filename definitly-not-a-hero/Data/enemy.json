@@ -4,46 +4,67 @@
 	  "id": "white_square_enemy",
 	  "name": "Square_enemy",
 	  "hp": 50,
-	  "damage": 4,
-	  "speed": 70,
+	  "damage": 5,
+	  "speed": 150,
 	  "xp_reward": 20,
-	  "gold_reward": 2
+	  "gold_reward": 2,
+	  "weaknesses": ["fire"],
+	  "resistances": ["thorn"]
 	},
 	{
 	  "id": "white_circle_enemy",
 	  "name": "Circle_enemy",
 	  "hp": 30,
 	  "damage": 5,
-	  "speed": 110,
+	  "speed": 0,
 	  "xp_reward": 15,
-	  "gold_reward": 3
+	  "gold_reward": 3,
+	  "weaknesses": ["fire"],
+	  "resistances": ["thorn"]
 	},
 	{
 	  "id": "white_hexa_enemy",
 	  "name": "hexa_enemy",
 	  "hp": 20,
 	  "damage": 20,
-	  "speed": 250,
+	  "speed": 400,
 	  "xp_reward": 8,
-	  "gold_reward": 4
+	  "gold_reward": 4,
+	  "weaknesses": ["fire"],
+	  "resistances": ["thorn"]
 	},
 	{
 	  "id": "white_star_enemy",
 	  "name": "Star_enemy",
-	  "hp": 100,
+	  "hp": 200,
 	  "damage": 20,
-	  "speed": 40,
+	  "speed": 120,
 	  "xp_reward": 30,
-	  "gold_reward": 20
+	  "gold_reward": 20,
+	  "weaknesses": ["fire"],
+	  "resistances": ["thorn"]
 	},
 	{
-	  "id": "white_heart_enemy",
-	  "name": "heart_enemy",
+	  "id": "bat",
+	  "name": "bat",
 	  "hp": 15,
 	  "damage": 5,
-	  "speed": 60,
+	  "speed": 250,
 	  "xp_reward": 10,
-	  "gold_reward": 5
+	  "gold_reward": 5,
+	  "weaknesses": ["fire"],
+	  "resistances": ["thorn"]
+	},
+	{
+	  "id": "boss1_enemy",
+	  "name": "boss_enemy",
+	  "hp": 1000,
+	  "damage": 15,
+	  "speed": 100,
+	  "xp_reward": 100,
+	  "gold_reward": 80,
+	  "weaknesses": ["fire"],
+	  "resistances": ["thorn"]
 	}
   ]
 }

@@ -3,24 +3,21 @@
 	{
 	  "id": 0,
 	  "enemies": [
-		{ "type": "white_heart_enemy", "count": 1000, "spawn_delay": 0.4 },
-
+		{ "type": "bat", "count": 100, "spawn_delay": 0.4 }
 	  ]
 	},
 	{
 	  "id": 1,
-	  "enemies": [
-
-		{ "type": "white_square_enemy", "count": 7, "spawn_delay": 0.8 },
-		{ "type": "white_circle_enemy", "count": 7, "spawn_delay": 1 },
-
+	"boss": [
+		{ "type": "boss1_enemy", "count": 1, "spawn_delay": 0.8 }
 	  ]
+	 
 	},
 	{
 	  "id": 2,
 	 "enemies": [
 		{ "type": "white_square_enemy", "count": 12, "spawn_delay": 0.8 },
-		{ "type": "white_circle_enemy", "count": 12, "spawn_delay": 0.7 },
+		{ "type": "white_circle_enemy", "count": 12, "spawn_delay": 0.7 }
 	  ]
 	},
 	{

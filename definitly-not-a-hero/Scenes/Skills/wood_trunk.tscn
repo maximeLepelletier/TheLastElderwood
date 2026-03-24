@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://duavcvca30vvx"]
+[gd_scene format=3 uid="uid://duavcvca30vvx"]
 
 [ext_resource type="Script" uid="uid://dd6e7tuawrgl8" path="res://Scripts/wood_trunk.gd" id="1_g7l4m"]
 [ext_resource type="Texture2D" uid="uid://b6lm8nqnic4m" path="res://Assets/Simple Shapes/Square.png" id="2_is4b7"]
@@ -6,19 +6,20 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1d64w"]
 size = Vector2(512, 188)
 
-[node name="wood_trunk" type="Area2D"]
+[node name="wood_trunk" type="Area2D" unique_id=1534198928]
+scale = Vector2(2, 2)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_g7l4m")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=350046923]
 shape = SubResource("RectangleShape2D_1d64w")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=72955009]
 rotation = 1.5708
-scale = Vector2(0.5, 1)
+scale = Vector2(0.5, 1.4152097)
 texture = ExtResource("2_is4b7")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1501904469]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

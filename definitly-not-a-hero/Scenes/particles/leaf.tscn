@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dt8dtaicrfu6g"]
 
-[ext_resource type="Texture2D" uid="uid://6e0hlfa0gsae" path="res://Assets/sprites/leaf_white.png" id="1_mxw6c"]
+[ext_resource type="Texture2D" uid="uid://6e0hlfa0gsae" path="res://Assets/sprites/skills/leaf_white.png" id="1_mxw6c"]
 
 [sub_resource type="Gradient" id="Gradient_c00yn"]
 offsets = PackedFloat32Array(0, 0.881533, 1)

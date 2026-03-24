@@ -6,7 +6,7 @@ uniform float radius_ratio = 0.5
 void fragment() {
     vec2 uv = UV;                 // coordonnées locales
     vec2 center = vec2(0.5, 0.5);
-    
+
     float min_dim = min(TEXTURE_PIXEL_SIZE.x, TEXTURE_PIXEL_SIZE.y);
     float radius = radius_ratio ;
 

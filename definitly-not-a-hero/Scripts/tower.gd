@@ -16,6 +16,7 @@ var skill_child_instance
 var bonuses := {}
 var multipliers := {}
 var cumult := {}
+var properties:={}
 #-------------------------------------------------------------------------#
 #CIBLAGE ENUMERATOR
 #-------------------------------------------------------------------------#
@@ -179,7 +180,18 @@ func _on_timer_timeout() -> void:
 	stats = {
 		"damage":get_stat("bullet","damage"),
 		"speed":get_stat("bullet","speed"),
-		"range":get_stat("bullet","range")
+		"range":get_stat("bullet","range"),
+		"mode":get_property("bullet","mode",""),
+		"damage_per_tick": get_stat("bullet","damage_per_tick"),
+		"dot_duration": get_stat("bullet","dot_duration"),
+		"dot_rate": get_stat("bullet","dot_rate"),
+		"explosion_radius": get_stat("bullet","explosion_radius"),
+		"explosion_damage": get_stat("bullet","explosion_damage"),
+		"explosion_count": get_stat("bullet","explosion_count"),
+		"chain_explosion": get_property("bullet","chain_explosion",false),
+		"thorn_damage_storage":get_stat("bullet","thorn_damage_storage"),
+		"thorn_max_count":get_stat("bullet","thorn_max_count"),
+		"thorn_max_flat_damage":get_stat("bullet","thorn_max_flat_damage"),		
 		}
 	shoot(Gamedata.BULLET,stats,get_target(TargetMode.CLOSEST,manual_target_position))
 
@@ -302,7 +314,7 @@ func unlockSkill(skill_ID):
 	if not skill_upgrades_count.has(skill_ID):
 		skill_upgrades_count[skill_ID] = 0
 		
-func upgradeSkill(base_skill: String, skill_upgrade: String, data_value: float) -> void:
+func upgradeSkill(base_skill: String, skill_upgrade: String, data_value) -> void:
 	# comptage
 	skill_upgrades_count[base_skill] = skill_upgrades_count.get(base_skill, 0) + 1
 	skill_upgrades_count[skill_upgrade] = skill_upgrades_count.get(skill_upgrade, 0) + 1
@@ -311,8 +323,18 @@ func upgradeSkill(base_skill: String, skill_upgrade: String, data_value: float) 
 		return
 	# mapping upgrade → stat impactée
 	var upgrade_map = {
-		"fire_rate_plus":       { "stat": "fire_rate", "mode": "cumult" },
-		"damage_plus":       	{ "stat": "damage", "mode": "add" },
+		"bullet_fire_rate_plus":       { "stat": "fire_rate", "mode": "cumult" },
+		"bullet_damage_plus":       	{ "stat": "damage", "mode": "add" },
+		"bullet_fire_mode":       	{ "stat": "mode", "mode": "set" },
+		"bullet_fire_damage":       	{ "stat": "damage_per_tick", "mode": "cumult" },	
+		"bullet_fire_duration":       	{ "stat": "fire_duration", "mode": "cumult" },	
+		"bullet_explosion_mode":       	{ "stat": "mode", "mode": "set" },
+		"bullet_explosion_damage_up":       	{ "stat": "explosion_damage", "mode": "add" },	
+		"bullet_explosion_radius_up":       	{ "stat": "explosion_radius", "mode": "add" },
+		"bullet_explosion_count_up":       	{ "stat": "explosion_count", "mode": "add" },	
+		"bullet_thorn_mode":       	{ "stat": "mode", "mode": "set" },
+		"bullet_thorn_damage_storage_up":       	{ "stat": "damage_storage", "mode": "cumult" },	
+		"bullet_thorn_max_count_up":       	{ "stat": "thorn_max_count", "mode": "add" },	
 		"root_damage_up":       { "stat": "damage_per_tick", "mode": "cumult" },
 		"root_fire_rate_up":    { "stat": "fire_rate", "mode": "cumult" },
 		"root_radius_up":       { "stat": "radius", "mode": "add" },
@@ -344,7 +366,7 @@ func upgradeSkill(base_skill: String, skill_upgrade: String, data_value: float) 
 	_apply_stat_upgrade(base_skill, upgrade.stat, upgrade.mode, data_value)
 	_refresh_skill(base_skill)
 
-func _apply_stat_upgrade(skill: String, stat: String, mode: String, value: float) -> void:
+func _apply_stat_upgrade(skill: String, stat: String, mode: String, value) -> void:
 	match mode:
 		"add":
 			if not bonuses.has(skill):
@@ -359,6 +381,11 @@ func _apply_stat_upgrade(skill: String, stat: String, mode: String, value: float
 				cumult[skill] = {}
 			cumult[skill][stat] = cumult[skill].get(stat, 0) + value
 			print("FINAL:" + str(cumult[skill][stat]))
+		"set":
+			if not properties.has(skill):
+				properties[skill] = {}
+			properties[skill][stat] = value
+
 		
 	# refresh UI / shield si besoin
 	if skill == "sylv_shield":
@@ -415,6 +442,10 @@ func get_stat(skill: String, stat: String) -> float:
 		skill,
 		stat
 	)
+func get_property(skill: String, stat: String, default_value = ""):
+	if properties.has(skill):
+		return properties[skill].get(stat, default_value)
+	return default_value
 
 func _refresh_skill(skill: String) -> void:
 		if skill=="root_aura":
