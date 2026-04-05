@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dxpegw7gx3ry0"]
+[gd_scene format=3 uid="uid://dxpegw7gx3ry0"]
 
 [ext_resource type="Script" uid="uid://crh0equegbe4n" path="res://Scripts/Enemy.gd" id="1_n57o8"]
 [ext_resource type="Texture2D" uid="uid://bq6suqqc8815w" path="res://Assets/Simple Shapes/Circle.png" id="2_4b532"]
@@ -44,33 +44,42 @@ _data = {
 &"hurt": SubResource("Animation_6lmlw")
 }
 
-[node name="CircleEnemy" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_mpd20"]
+radius = 15.033297
+
+[node name="CircleEnemy" type="CharacterBody2D" unique_id=1593389302]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_n57o8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=922430415]
 shape = SubResource("CircleShape2D_xw0ou")
 
-[node name="sprite" type="Sprite2D" parent="."]
+[node name="sprite" type="Sprite2D" parent="." unique_id=834050753]
 unique_name_in_owner = true
 position = Vector2(0, -1.19209e-07)
 texture = ExtResource("2_4b532")
 
-[node name="Enemynode" type="Node2D" parent="."]
+[node name="Enemynode" type="Node2D" parent="." unique_id=621530885]
 unique_name_in_owner = true
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=96052703]
 unique_name_in_owner = true
 
-[node name="hit_type" parent="." instance=ExtResource("3_mpd20")]
+[node name="hit_type" parent="." unique_id=1293254671 instance=ExtResource("3_mpd20")]
 unique_name_in_owner = true
 texture = ExtResource("2_4b532")
 
-[node name="Animation" type="AnimationPlayer" parent="."]
+[node name="Animation" type="AnimationPlayer" parent="." unique_id=1731025926]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_o8kgs")
-}
+libraries/ = SubResource("AnimationLibrary_o8kgs")
+
+[node name="deatharea" type="Area2D" parent="." unique_id=546727785]
+collision_layer = 0
+collision_mask = 0
+
+[node name="deathCollider" type="CollisionShape2D" parent="deatharea" unique_id=1919700312]
+shape = SubResource("CircleShape2D_mpd20")
+debug_color = Color(0.4467703, 0.5102725, 0.8227221, 0.41960785)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

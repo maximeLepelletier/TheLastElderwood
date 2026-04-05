@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://by8eh0p283yr6"]
+[gd_scene format=3 uid="uid://by8eh0p283yr6"]
 
 [ext_resource type="Script" uid="uid://crh0equegbe4n" path="res://Scripts/Enemy.gd" id="1_ugjmh"]
 [ext_resource type="Texture2D" uid="uid://cu2qwrcs46faf" path="res://Assets/sprites/enemy/bat-fly.png" id="2_ugjmh"]
@@ -211,7 +211,7 @@ resource_name = "hurt"
 length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -228,12 +228,15 @@ _data = {
 &"hurt": SubResource("Animation_6lmlw")
 }
 
-[node name="bat" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ugjmh"]
+radius = 15.033297
+
+[node name="bat" type="CharacterBody2D" unique_id=1941927994]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_ugjmh")
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1058699767]
 unique_name_in_owner = true
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_y5ppj")
@@ -241,24 +244,30 @@ animation = &"fly"
 autoplay = "fly"
 frame_progress = 0.771901
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1966587757]
 position = Vector2(0, -10)
 shape = SubResource("CircleShape2D_xw0ou")
 
-[node name="Enemynode" type="Node2D" parent="."]
+[node name="Enemynode" type="Node2D" parent="." unique_id=1631459304]
 unique_name_in_owner = true
 
-[node name="Animation" type="AnimationPlayer" parent="."]
+[node name="Animation" type="AnimationPlayer" parent="." unique_id=1724731442]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_o8kgs")
-}
+libraries/ = SubResource("AnimationLibrary_o8kgs")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1006996010]
 unique_name_in_owner = true
 
-[node name="hit_type" parent="." instance=ExtResource("3_f4p0l")]
+[node name="hit_type" parent="." unique_id=136979958 instance=ExtResource("3_f4p0l")]
 unique_name_in_owner = true
 texture = ExtResource("4_3ro1t")
+
+[node name="deatharea" type="Area2D" parent="." unique_id=694285011]
+collision_layer = 0
+collision_mask = 0
+
+[node name="deathCollider" type="CollisionShape2D" parent="deatharea" unique_id=765262624]
+shape = SubResource("CircleShape2D_ugjmh")
+debug_color = Color(0.4467703, 0.5102725, 0.8227221, 0.41960785)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

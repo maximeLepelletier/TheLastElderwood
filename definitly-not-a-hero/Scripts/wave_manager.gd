@@ -78,6 +78,14 @@ func mob_spawn(enemy_id: String):
 	add_child(enemy_instance)
 	enemy_instance.init(enemy_id)	
 	enemy_instance.add_to_group("enemy")
+	
+func sub_mob_spawn(enemy_id: String, position: Vector2):		
+	var enemy_instance = enemy_scenes[enemy_id].instantiate()
+	enemy_instance.position = position
+	add_child(enemy_instance)
+	enemy_instance.init(enemy_id)
+	enemy_instance.is_sub_mob = true
+	enemy_instance.add_to_group("enemy")	
 
 func _on_enemy_died() -> void:
 	enemies_alive -=1

@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://yybnq7rija4p"]
+[gd_scene load_steps=10 format=3 uid="uid://yybnq7rija4p"]
 
 [ext_resource type="Script" uid="uid://barec8bhhc4l0" path="res://Scripts/skill_tree_panel.gd" id="1_y2t3y"]
 [ext_resource type="Texture2D" uid="uid://5lc25mb12op6" path="res://Assets/UI/icons/bean_icon.png" id="2_3440g"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dsmj1i13dyfg2" path="res://Assets/sprites/collectable/fc2118.png" id="7_1tm4f"]
 [ext_resource type="Texture2D" uid="uid://fcm0d4esrt1x" path="res://Assets/UI/btn/red_button.png" id="7_lyi8q"]
 
-[node name="SkillTreePanel" type="Control" unique_id=1273118449]
+[node name="SkillTreePanel" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,13 +19,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_y2t3y")
 
-[node name="Dimmer" type="ColorRect" parent="." unique_id=1870605017]
+[node name="Dimmer" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 721.0
 offset_bottom = 1283.0
 color = Color(0, 0, 0, 0.333333)
 
-[node name="BackGround" type="TextureRect" parent="." unique_id=1547080410]
+[node name="BackGround" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 59.0
 offset_top = 277.0
@@ -36,7 +36,7 @@ texture = ExtResource("2_lx0k2")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="icon" type="TextureRect" parent="BackGround" unique_id=1252548199]
+[node name="icon" type="TextureRect" parent="BackGround"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -50,7 +50,7 @@ mouse_filter = 0
 texture = ExtResource("2_3440g")
 expand_mode = 1
 
-[node name="Title" type="Label" parent="BackGround/icon" unique_id=933717313]
+[node name="Title" type="Label" parent="BackGround/icon"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -65,14 +65,13 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("3_yrvfg")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 18
 text = "dsfsdfsdfdfgdfgdfgfdgfg"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 1
 
-[node name="Progression" type="Label" parent="BackGround/icon" unique_id=2107454172]
+[node name="Progression" type="Label" parent="BackGround/icon"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -83,14 +82,13 @@ offset_right = 129.0
 offset_bottom = 77.0
 grow_horizontal = 2
 theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("3_yrvfg")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 18
 text = "kjqds flkqjh dhgflkdfg "
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="border" type="TextureRect" parent="BackGround/icon" unique_id=1771458622]
+[node name="border" type="TextureRect" parent="BackGround/icon"]
 layout_mode = 0
 offset_left = -6.0
 offset_top = -7.0
@@ -99,14 +97,14 @@ offset_bottom = 54.0
 texture = ExtResource("5_1tm4f")
 expand_mode = 1
 
-[node name="ressources" type="Control" parent="BackGround" unique_id=1522403246]
+[node name="ressources" type="Control" parent="BackGround"]
 anchors_preset = 0
 offset_left = 148.0
 offset_top = 211.0
 offset_right = 453.0
 offset_bottom = 246.0
 
-[node name="GaiaIcon" type="TextureRect" parent="BackGround/ressources" unique_id=1260642395]
+[node name="GaiaIcon" type="TextureRect" parent="BackGround/ressources"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -119,7 +117,7 @@ grow_vertical = 2
 texture = ExtResource("5_lx0k2")
 expand_mode = 3
 
-[node name="GaiaCostLabel" type="Label" parent="BackGround/ressources" unique_id=156480789]
+[node name="GaiaCostLabel" type="Label" parent="BackGround/ressources"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -133,12 +131,11 @@ offset_bottom = 11.5
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("3_yrvfg")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 18
 text = "0"
 vertical_alignment = 1
 
-[node name="GoldIcon" type="TextureRect" parent="BackGround/ressources" unique_id=1988651589]
+[node name="GoldIcon" type="TextureRect" parent="BackGround/ressources"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -151,7 +148,7 @@ grow_vertical = 2
 texture = ExtResource("7_1tm4f")
 expand_mode = 3
 
-[node name="GoldCostLabel" type="Label" parent="BackGround/ressources" unique_id=1704971275]
+[node name="GoldCostLabel" type="Label" parent="BackGround/ressources"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -165,19 +162,18 @@ offset_bottom = 11.5
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("3_yrvfg")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 18
 text = "0"
 vertical_alignment = 1
 
-[node name="Button" type="Control" parent="BackGround" unique_id=933154423]
+[node name="Button" type="Control" parent="BackGround"]
 anchors_preset = 0
 offset_left = 149.0
 offset_top = 260.0
 offset_right = 452.0
 offset_bottom = 316.0
 
-[node name="BuyButton" type="TextureButton" parent="BackGround/Button" unique_id=864107868]
+[node name="BuyButton" type="TextureButton" parent="BackGround/Button"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -191,7 +187,7 @@ texture_normal = ExtResource("6_1tm4f")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="BackGround/Button/BuyButton" unique_id=781513137]
+[node name="Label" type="Label" parent="BackGround/Button/BuyButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -209,7 +205,7 @@ theme_override_fonts/font = ExtResource("3_yrvfg")
 theme_override_font_sizes/font_size = 8
 text = "buy"
 
-[node name="ExitButton" type="TextureButton" parent="BackGround/Button" unique_id=1480558474]
+[node name="ExitButton" type="TextureButton" parent="BackGround/Button"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -225,7 +221,7 @@ texture_normal = ExtResource("7_lyi8q")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="BackGround/Button/ExitButton" unique_id=60415304]
+[node name="Label" type="Label" parent="BackGround/Button/ExitButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

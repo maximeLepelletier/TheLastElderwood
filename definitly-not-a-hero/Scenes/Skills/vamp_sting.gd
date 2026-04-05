@@ -43,7 +43,7 @@ func _on_body_entered(body: Node2D) -> void:
 	enemy_hitted+=1
 	print("vamp_sting touché ! damages :" + str(bullet_damage))
 	if body.has_method("take_damage"):
-		body.take_damage(bullet_damage)
+		body.take_damage(bullet_damage,"physical")
 	
 func set_damage(value: int) -> void:
 	bullet_damage = value

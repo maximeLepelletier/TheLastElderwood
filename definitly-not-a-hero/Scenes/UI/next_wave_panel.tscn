@@ -1,6 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cskpfxwqlm4a5"]
-
-[ext_resource type="FontFile" uid="uid://2r7c436ff0di" path="res://Assets/Fonts/Comical Cartoon.ttf" id="3_xwhrp"]
+[gd_scene load_steps=5 format=3 uid="uid://cskpfxwqlm4a5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cylf2"]
 
@@ -85,8 +83,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
-theme_override_fonts/font = ExtResource("3_xwhrp")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 55
 text = "tests"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

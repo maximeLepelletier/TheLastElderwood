@@ -3,7 +3,7 @@
 	{
 	  "id": 0,
 	  "enemies": [
-		{ "type": "bat", "count": 100, "spawn_delay": 0.4 }
+		{ "type": "bat", "count": 10, "spawn_delay": 0.6 }
 	  ]
 	},
 	{
@@ -23,7 +23,6 @@
 	{
 	  "id": 3,
 	 "enemies": [
-		{ "type": "white_heart_enemy", "count": 15, "spawn_delay": 0.5 },
 		{ "type": "white_square_enemy", "count": 12, "spawn_delay": 0.8 },
 		{ "type": "white_circle_enemy", "count": 12, "spawn_delay": 0.7 },
 
@@ -32,7 +31,6 @@
 	{
 	  "id": 4,
 	 "enemies": [
-		{ "type": "white_heart_enemy", "count": 20, "spawn_delay": 0.5 },
 		{ "type": "white_square_enemy", "count": 15, "spawn_delay": 0.8 },
 		{ "type": "white_circle_enemy", "count": 15, "spawn_delay": 0.5 },
 
@@ -41,13 +39,11 @@
 	{
 	  "id": 5,
 	 "enemies": [
-		{ "type": "white_heart_enemy", "count": 40, "spawn_delay": 0.3 }
 	  ]
 	},
 	{
 	  "id": 7,
 	 "enemies": [
-		{ "type": "white_heart_enemy", "count": 30, "spawn_delay": 0.5 },
 		{ "type": "white_square_enemy", "count": 15, "spawn_delay": 0.5 },
 		{ "type": "white_circle_enemy", "count": 15, "spawn_delay": 0.5 },
 

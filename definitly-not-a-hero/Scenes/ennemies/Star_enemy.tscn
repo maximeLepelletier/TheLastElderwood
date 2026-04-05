@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ejon80fqicuv"]
+[gd_scene format=3 uid="uid://ejon80fqicuv"]
 
 [ext_resource type="Script" uid="uid://crh0equegbe4n" path="res://Scripts/Enemy.gd" id="1_vf416"]
 [ext_resource type="Texture2D" uid="uid://c0o7xai6vq3uv" path="res://Assets/Simple Shapes/Srar.png" id="2_vf416"]
@@ -45,35 +45,44 @@ _data = {
 &"hurt": SubResource("Animation_6lmlw")
 }
 
-[node name="SquareEnemy" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_uge0y"]
+radius = 15.033297
+
+[node name="SquareEnemy" type="CharacterBody2D" unique_id=2025011493]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_vf416")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1891171807]
 position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_jmmcm")
 
-[node name="sprite" type="Sprite2D" parent="."]
+[node name="sprite" type="Sprite2D" parent="." unique_id=731780160]
 unique_name_in_owner = true
 position = Vector2(0, -1.19209e-07)
 texture = ExtResource("2_vf416")
 
-[node name="SquareEnemynode" type="Node2D" parent="."]
+[node name="SquareEnemynode" type="Node2D" parent="." unique_id=1670185144]
 unique_name_in_owner = true
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=658363728]
 unique_name_in_owner = true
 
-[node name="hit_type" parent="." instance=ExtResource("3_laj8x")]
+[node name="hit_type" parent="." unique_id=1426238054 instance=ExtResource("3_laj8x")]
 unique_name_in_owner = true
 position = Vector2(0, -1)
 texture = ExtResource("4_uge0y")
 
-[node name="Animation" type="AnimationPlayer" parent="."]
+[node name="Animation" type="AnimationPlayer" parent="." unique_id=1172060298]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_o8kgs")
-}
+libraries/ = SubResource("AnimationLibrary_o8kgs")
+
+[node name="deatharea" type="Area2D" parent="." unique_id=1920027320]
+collision_layer = 0
+collision_mask = 0
+
+[node name="deathCollider" type="CollisionShape2D" parent="deatharea" unique_id=874667110]
+shape = SubResource("CircleShape2D_uge0y")
+debug_color = Color(0.4467703, 0.5102725, 0.8227221, 0.41960785)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

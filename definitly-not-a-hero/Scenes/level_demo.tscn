@@ -1,16 +1,15 @@
-[gd_scene format=3 uid="uid://duw4qebdd3no2"]
+[gd_scene load_steps=10 format=3 uid="uid://duw4qebdd3no2"]
 
 [ext_resource type="Script" uid="uid://cljrgc84obwtl" path="res://Scripts/level_demo.gd" id="1_7nrvs"]
 [ext_resource type="PackedScene" uid="uid://bdlhhr2lp6lsn" path="res://Scenes/Player.tscn" id="1_a63e3"]
 [ext_resource type="Texture2D" uid="uid://b7vvu5fs8r8v0" path="res://Assets/sprites/UI/field.png" id="2_ji1tt"]
 [ext_resource type="PackedScene" uid="uid://dhdqnwu4lp5fr" path="res://Scenes/UI/upgrade_menu.tscn" id="3_1gg11"]
 [ext_resource type="Texture2D" uid="uid://dsmj1i13dyfg2" path="res://Assets/sprites/collectable/fc2118.png" id="4_shw11"]
-[ext_resource type="FontFile" uid="uid://2r7c436ff0di" path="res://Assets/Fonts/Comical Cartoon.ttf" id="5_srvng"]
 [ext_resource type="PackedScene" uid="uid://cskpfxwqlm4a5" path="res://Scenes/UI/next_wave_panel.tscn" id="7_v5bgb"]
 
 [sub_resource type="Curve2D" id="Curve2D_1gg11"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1427, -1308, 0, 0, 0, 0, 1591, -943, 0, 0, 0, 0, 647.4399, -872.9999, 0, 0, 0, 0, -241, -943, 0, 0, 0, 0, -103, -1305, 0, 0, 0, 0, 695.768, -1812, 0, 0, 0, 0, 1426.96, -1312)
+"points": PackedVector2Array(0, 0, 0, 0, 1427, -1308, 0, 0, 0, 0, 1591, -943, 0, 0, 0, 0, 647.44, -873, 0, 0, 0, 0, -241, -943, 0, 0, 0, 0, -103, -1305, 0, 0, 0, 0, 695.768, -1812, 0, 0, 0, 0, 1426.96, -1312)
 }
 point_count = 7
 
@@ -39,38 +38,38 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="Level DEMO" type="Node2D" unique_id=786089800]
+[node name="Level DEMO" type="Node2D"]
 script = ExtResource("1_7nrvs")
 
-[node name="Field" type="Sprite2D" parent="." unique_id=743406216]
+[node name="Field" type="Sprite2D" parent="."]
 z_index = -100
 position = Vector2(1823, 3249)
 scale = Vector2(5.73096, 6.68701)
 texture = ExtResource("2_ji1tt")
 
-[node name="Player" parent="." unique_id=597280719 instance=ExtResource("1_a63e3")]
+[node name="Player" parent="." instance=ExtResource("1_a63e3")]
 position = Vector2(1711, 5442)
 
-[node name="Path2D" type="Path2D" parent="." unique_id=354024596]
-position = Vector2(-244.82071, 122.194824)
-scale = Vector2(3.1243374, 0.31522894)
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(-244.821, 122.195)
+scale = Vector2(3.12434, 0.315229)
 curve = SubResource("Curve2D_1gg11")
 
-[node name="SpawnCurves" type="PathFollow2D" parent="Path2D" unique_id=192735907]
+[node name="SpawnCurves" type="PathFollow2D" parent="Path2D"]
 unique_name_in_owner = true
 position = Vector2(1427, -1308)
-rotation = 1.1485121
+rotation = 1.14851
 
-[node name="HUD" type="CanvasLayer" parent="." unique_id=1372144741]
+[node name="HUD" type="CanvasLayer" parent="."]
 offset = Vector2(213.04, 534.76)
 transform = Transform2D(1, 0, 0, 1, 213.04, 534.76)
 
-[node name="Gold" type="Sprite2D" parent="HUD" unique_id=1378398841]
+[node name="Gold" type="Sprite2D" parent="HUD"]
 position = Vector2(-171.04, -495.76)
 scale = Vector2(0.59375, 0.625)
 texture = ExtResource("4_shw11")
 
-[node name="Gold_label" type="Label" parent="HUD/Gold" unique_id=962723326]
+[node name="Gold_label" type="Label" parent="HUD/Gold"]
 anchors_preset = -1
 anchor_left = -0.312
 anchor_top = -0.64
@@ -81,14 +80,13 @@ offset_top = 26.56
 offset_right = 145.021
 offset_bottom = 57.56
 theme_override_constants/outline_size = 15
-theme_override_fonts/font = ExtResource("5_srvng")
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 30
 text = ": 0 GOLD"
 
-[node name="gold_marker" type="Marker2D" parent="HUD/Gold" unique_id=1046768029]
+[node name="gold_marker" type="Marker2D" parent="HUD/Gold"]
 position = Vector2(246.04, 538.76)
 
-[node name="exp_Bar" type="ProgressBar" parent="HUD" unique_id=648974377]
+[node name="exp_Bar" type="ProgressBar" parent="HUD"]
 offset_left = -192.0
 offset_top = -455.0
 offset_right = 32.0
@@ -99,7 +97,7 @@ step = 0.0
 value = 34.225
 show_percentage = false
 
-[node name="Exp_label" type="Label" parent="HUD/exp_Bar" unique_id=357151275]
+[node name="Exp_label" type="Label" parent="HUD/exp_Bar"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.312
@@ -111,22 +109,21 @@ offset_top = 22.548
 offset_right = 228.848
 offset_bottom = 54.548
 theme_override_constants/outline_size = 9
-theme_override_fonts/font = ExtResource("5_srvng")
-theme_override_font_sizes/font_size = 7
+theme_override_font_sizes/font_size = 16
 text = "EXP"
 
-[node name="exp_marker" type="Marker2D" parent="HUD/exp_Bar" unique_id=233954550]
+[node name="exp_marker" type="Marker2D" parent="HUD/exp_Bar"]
 position = Vector2(255.04, 547.76)
 
-[node name="Upgrade_menu" parent="HUD" unique_id=1310176878 instance=ExtResource("3_1gg11")]
+[node name="Upgrade_menu" parent="HUD" instance=ExtResource("3_1gg11")]
 visible = false
 position = Vector2(-149.04, -247.76)
 scale = Vector2(1, 1)
 
-[node name="Next_wave_panel" parent="HUD" unique_id=1162647535 instance=ExtResource("7_v5bgb")]
+[node name="Next_wave_panel" parent="HUD" instance=ExtResource("7_v5bgb")]
 unique_name_in_owner = true
 
-[node name="Timer" type="Timer" parent="." unique_id=6633317]
+[node name="Timer" type="Timer" parent="."]
 wait_time = 0.25
 autostart = true
 

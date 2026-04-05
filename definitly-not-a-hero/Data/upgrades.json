@@ -1,14 +1,14 @@
 {  
-"fire_rate_plus": {"type": "skill_upgrade", "target": "fire_rate", "requires": "bullet", "value": 0.1, "text": "Vitesse de tir +10%"},
-"damage_plus": {"type": "skill_upgrade", "target": "damage", "requires": "bullet", "value": 2, "text": "Dégâts +2"},
-"hp_plus": {"type": "stat", "target": "hp", "value": 50, "text": "Points de vie +20."},
+"bullet_fire_rate_plus": {"type": "skill_upgrade", "target": "fire_rate", "requires": "bullet", "value": 0.1, "text": "Vitesse de tir +10%", "icon":"hp_plus.png"},
+"bullet_damage_plus": {"type": "skill_upgrade", "target": "damage", "requires": "bullet", "value": 2, "text": "Dégâts +2","icon":"fireshoot.png"},
+"hp_plus": {"type": "stat", "target": "hp", "value": 50, "text": "Points de vie +20.","icon":"sylvshield.png"},
 "regen_plus": {"type": "stat", "target": "regen", "value": 1, "text": "Régénération +0.5/sec."},
 
 "bullet_fire_mode": {  "type": "skill_upgrade",  "target": "mode", "available" :1, "requires": "bullet", "unlock":["bullet_fire_damage","bullet_fire_duration"], "lock": ["bullet_explosion_mode","bullet_thorn_mode"],  "value": "fire",  "text": "Graines enflammées : les graines embrasent les ennemis."},
 "bullet_fire_damage": {  "type": "skill_upgrade", "available" :2, "target": "fire_damage",  "requires": "bullet",  "mode_skill": "fire",  "value": 0.5,  "text": "Combustion : dégâts de brûlure +50%."},
 "bullet_fire_duration": {  "type": "skill_upgrade",  "available" :2, "target": "fire_duration",  "requires": "bullet", "mode_skill": "fire", "value": 0.5,  "text": "Flamme persistante : durée de brûlure +50%."},
 
-"bullet_explosion_mode": {  "type": "skill_upgrade",  "target": "mode", "available" :1, "requires": "bullet", "unlock":["bullet_explosion_damage_up","bullet_explosion_radius_up","bullet_explosion_count_up"], "lock": ["bullet_fire_mode","bullet_thorn_mode"],  "value": "explosion",  "text": "Graines enflammées : les graines embrasent les ennemis."},
+"bullet_explosion_mode": {  "type": "skill_upgrade",  "target": "mode", "available" :1, "requires": "bullet", "unlock":["bullet_explosion_damage_up","bullet_explosion_radius_up","bullet_explosion_count_up"], "lock": ["bullet_fire_mode","bullet_thorn_mode"],  "value": "explosion",  "text": "Graines explosive : les graines explosentsur une zone."},
 "bullet_explosion_damage_up": {  "type": "skill_upgrade", "available" :2, "target": "explosion_damage",  "requires": "bullet",  "mode_skill": "explosion",  "value": 0.5,  "text": "onde de choc : dégâts de d'explosion +50%."},
 "bullet_explosion_radius_up": {  "type": "skill_upgrade",  "available" :2, "target": "explosion_radius",  "requires": "bullet", "mode_skill": "explosion", "value": 0.5,  "text": "poudre compacte :rayon de l'explosion +50%."},
 "bullet_explosion_count_up": {  "type": "skill_upgrade", "available" :2, "target": "explosion_count",  "requires": "bullet",  "mode_skill": "explosion",  "value": 1,  "text": "instabilté : explosion en chaine +1 "},
@@ -48,5 +48,8 @@
 "wood_trunk_speed_up": {  "type": "skill_upgrade",  "available" :2, "requires": "wood_trunk",  "value": 0.2,  "text": "Tronc poli :  le tronc roule 20% plus vite sur les ennemis"},
 "wood_trunk_size_up": {  "type": "skill_upgrade",  "available" :1, "requires": "wood_trunk",  "value": 0.5,  "text": "Arbre ancien : le tronc est 50% plus volumineux"},
 "wood_trunk_fire_rate_up": {  "type": "skill_upgrade",  "available" :2, "requires": "wood_trunk",  "value": 0.25,  "text": "déforestation : fréquence d'envoi des tronc reduite de 25%"},
+
+
+
 
 }

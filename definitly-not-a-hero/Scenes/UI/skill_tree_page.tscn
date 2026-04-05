@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://c23058wvff7ev"]
+[gd_scene load_steps=7 format=3 uid="uid://c23058wvff7ev"]
 
 [ext_resource type="Script" uid="uid://e5iarasjqye" path="res://Scripts/SkillTreeController.gd" id="1_agrso"]
 [ext_resource type="Texture2D" uid="uid://bbqho51go3tcu" path="res://Assets/splashart/skilltree revisited.png" id="1_g2hyj"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c81oxcaumsnf4" path="res://Scenes/UI/skill_link.tscn" id="2_6aadd"]
 [ext_resource type="PackedScene" uid="uid://cc6bhq7p3ofcc" path="res://Scenes/UI/skill_node.tscn" id="2_g2hyj"]
 
-[node name="SkillTreePage" type="Control" unique_id=1671180223]
+[node name="SkillTreePage" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +16,7 @@ offset_bottom = 149.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TreeViewport" type="Control" parent="." unique_id=2037747092]
+[node name="TreeViewport" type="Control" parent="."]
 anchors_preset = 0
 offset_left = -1.0
 offset_top = -3.0
@@ -24,7 +24,7 @@ offset_right = 717.0
 offset_bottom = 1277.0
 mouse_filter = 2
 
-[node name="SkillTreePanel" parent="TreeViewport" unique_id=2127637099 instance=ExtResource("1_ytikp")]
+[node name="SkillTreePanel" parent="TreeViewport" instance=ExtResource("1_ytikp")]
 visible = false
 z_index = 100
 z_as_relative = false
@@ -34,7 +34,7 @@ offset_top = 3.0
 offset_right = 120.0
 offset_bottom = 387.0
 
-[node name="DragView" type="Control" parent="TreeViewport" unique_id=335438521]
+[node name="DragView" type="Control" parent="TreeViewport"]
 layout_mode = 1
 anchors_preset = 0
 offset_left = -721.0
@@ -43,7 +43,7 @@ offset_right = 1327.0
 offset_bottom = 2282.0
 script = ExtResource("1_gh4nt")
 
-[node name="Wallpaper" type="TextureRect" parent="TreeViewport/DragView" unique_id=1894413730]
+[node name="Wallpaper" type="TextureRect" parent="TreeViewport/DragView"]
 z_index = -99
 layout_mode = 0
 offset_right = 1024.0
@@ -52,7 +52,7 @@ scale = Vector2(2, 2)
 mouse_filter = 2
 texture = ExtResource("1_g2hyj")
 
-[node name="SkillNode" parent="TreeViewport/DragView" unique_id=527349568 groups=["skill_nodes"] instance=ExtResource("2_g2hyj")]
+[node name="SkillNode" parent="TreeViewport/DragView" groups=["skill_nodes"] instance=ExtResource("2_g2hyj")]
 layout_mode = 1
 anchor_left = 0.485
 anchor_top = 0.27
@@ -65,7 +65,7 @@ offset_bottom = 53.5549
 grow_horizontal = 1
 skill_id = "1"
 
-[node name="Control" parent="TreeViewport/DragView/SkillNode" unique_id=1073034690 groups=["Skill_link"] instance=ExtResource("2_6aadd")]
+[node name="Control" parent="TreeViewport/DragView/SkillNode" groups=["Skill_link"] instance=ExtResource("2_6aadd")]
 z_index = -1
 layout_mode = 1
 offset_left = 27.9998
@@ -74,7 +74,7 @@ offset_right = -22.0002
 offset_bottom = -23.0
 rotation = 0.785398
 
-[node name="Control2" parent="TreeViewport/DragView/SkillNode" unique_id=1586637561 groups=["Skill_link"] instance=ExtResource("2_6aadd")]
+[node name="Control2" parent="TreeViewport/DragView/SkillNode" groups=["Skill_link"] instance=ExtResource("2_6aadd")]
 z_index = -1
 layout_mode = 1
 offset_left = 23.0
@@ -83,7 +83,7 @@ offset_right = -27.0
 offset_bottom = -29.0
 rotation = 2.35619
 
-[node name="SkillNode2" parent="TreeViewport/DragView" unique_id=631902591 groups=["skill_nodes"] instance=ExtResource("2_g2hyj")]
+[node name="SkillNode2" parent="TreeViewport/DragView" groups=["skill_nodes"] instance=ExtResource("2_g2hyj")]
 layout_mode = 1
 anchor_left = 0.566
 anchor_top = 0.327
@@ -96,7 +96,7 @@ offset_bottom = 53.6099
 grow_horizontal = 1
 skill_id = "2"
 
-[node name="Control" parent="TreeViewport/DragView/SkillNode2" unique_id=970623544 groups=["Skill_link"] instance=ExtResource("2_6aadd")]
+[node name="Control" parent="TreeViewport/DragView/SkillNode2" groups=["Skill_link"] instance=ExtResource("2_6aadd")]
 z_index = -1
 layout_mode = 1
 offset_left = 22.0001
@@ -105,7 +105,7 @@ offset_right = -27.9999
 offset_bottom = -23.0
 rotation = 1.5708
 
-[node name="SkillNode3" parent="TreeViewport/DragView" unique_id=749783514 groups=["skill_nodes"] instance=ExtResource("2_g2hyj")]
+[node name="SkillNode3" parent="TreeViewport/DragView" groups=["skill_nodes"] instance=ExtResource("2_g2hyj")]
 layout_mode = 1
 anchor_left = 0.406
 anchor_top = 0.326
@@ -118,7 +118,7 @@ offset_bottom = 52.8263
 grow_horizontal = 1
 skill_id = "3"
 
-[node name="Control" parent="TreeViewport/DragView/SkillNode3" unique_id=390969839 groups=["Skill_link"] instance=ExtResource("2_6aadd")]
+[node name="Control" parent="TreeViewport/DragView/SkillNode3" groups=["Skill_link"] instance=ExtResource("2_6aadd")]
 z_index = -1
 layout_mode = 1
 offset_left = 48.0
@@ -127,7 +127,7 @@ offset_right = 48.0
 offset_bottom = 26.0
 rotation = 1.5708
 
-[node name="SkillNode4" parent="TreeViewport/DragView" unique_id=1884109867 groups=["skill_nodes"] instance=ExtResource("2_g2hyj")]
+[node name="SkillNode4" parent="TreeViewport/DragView" groups=["skill_nodes"] instance=ExtResource("2_g2hyj")]
 layout_mode = 1
 anchor_left = 0.567
 anchor_top = 0.399
@@ -140,7 +140,7 @@ offset_bottom = 53.6832
 grow_horizontal = 1
 skill_id = "4"
 
-[node name="SkillNode5" parent="TreeViewport/DragView" unique_id=973444810 groups=["skill_nodes"] instance=ExtResource("2_g2hyj")]
+[node name="SkillNode5" parent="TreeViewport/DragView" groups=["skill_nodes"] instance=ExtResource("2_g2hyj")]
 layout_mode = 1
 anchor_left = 0.407
 anchor_top = 0.399
@@ -153,43 +153,47 @@ offset_bottom = 52.7285
 grow_horizontal = 1
 skill_id = "4"
 
-[node name="FixedUI" type="Control" parent="TreeViewport" unique_id=518036573]
+[node name="FixedUI" type="Control" parent="TreeViewport"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="SkillTreeController" type="Node" parent="." unique_id=215632996]
+[node name="SkillTreeController" type="Node" parent="."]
 script = ExtResource("1_agrso")
 
-[node name="Ressources" type="Label" parent="." unique_id=1261285528]
+[node name="Ressources" type="Label" parent="."]
 layout_mode = 0
 offset_right = 84.0
 offset_bottom = 101.0
+theme_override_font_sizes/font_size = 25
 text = "Gold : 
 GaiaSeed:
 Gem:
 "
 
-[node name="GoldLabel" type="Label" parent="." unique_id=868995132]
+[node name="GoldLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 48.0
-offset_top = 1.0
-offset_right = 88.0
-offset_bottom = 24.0
+offset_left = 61.0
+offset_top = 2.0
+offset_right = 101.0
+offset_bottom = 25.0
+theme_override_font_sizes/font_size = 25
 text = "0"
 
-[node name="GaiaLabel" type="Label" parent="." unique_id=595396817]
+[node name="GaiaLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 80.0
-offset_top = 27.0
-offset_right = 120.0
-offset_bottom = 50.0
+offset_left = 98.0
+offset_top = 30.0
+offset_right = 138.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 25
 text = "0"
 
-[node name="GemLabel" type="Label" parent="." unique_id=1946501826]
+[node name="GemLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 44.0
-offset_top = 53.0
-offset_right = 84.0
-offset_bottom = 76.0
+offset_left = 52.0
+offset_top = 60.0
+offset_right = 92.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 25
 text = "0"

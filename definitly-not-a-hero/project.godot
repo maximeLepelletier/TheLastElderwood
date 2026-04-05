@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Definitly not a HERO"
 run/main_scene="uid://duw4qebdd3no2"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://Assets/icon.svg"
 
 [autoload]
@@ -29,9 +29,14 @@ ComboManager="*res://Scripts/combo_manager.gd"
 Events="*res://Scripts/events.gd"
 Gamedata="*res://Scripts/gamedata.gd"
 Playerdata="*res://Scripts/playerdata.gd"
+DamageManager="*res://Scripts/damage_manager.gd"
 
 [display]
 
 window/size/viewport_width=720
 window/size/viewport_height=1280
 window/stretch/mode="viewport"
+
+[gui]
+
+theme/custom_font="uid://bag12g3sjpxvk"

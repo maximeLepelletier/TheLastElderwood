@@ -71,7 +71,7 @@ func explode():
 	
 	for body in %Explosion.get_overlapping_bodies():
 		if body.has_method("take_damage"):
-			body.take_damage(bullet_damage)
+			body.take_damage(bullet_damage,"explosion")
 	# 5. Effet visuel et suppression
 	$AnimationPlayer.play("splashin")
 	exploded = true

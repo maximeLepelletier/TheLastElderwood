@@ -26,9 +26,9 @@ func _on_update_shield(max_hp_shield,shield_current_hp,shield_regen):
 	set_shield_regen_rate(shield_regen)
 	set_current_hp_shield(shield_current_hp)
 	if shield_current_hp<=0:
-		sprite_2d.visible=false
+		visible=false
 	else:
-		sprite_2d.visible=true
+		visible=true
 		
 func set_max_shield(value):
 	max_shield = value

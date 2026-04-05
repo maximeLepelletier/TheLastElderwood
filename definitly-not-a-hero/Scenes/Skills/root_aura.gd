@@ -33,7 +33,7 @@ func _on_timer_timeout() -> void:
 	for enemy in enemies_in_zone:
 		if enemy and enemy.is_inside_tree():
 			if enemy.has_method("take_damage"):
-				enemy.take_damage(damage_per_tick) # Replace with function body.
+				enemy.take_damage(damage_per_tick,"physical") # Replace with function body.
 				print ("root_aura dmg : "+ str(damage_per_tick))
 
 func _on_body_entered(body: Node2D) -> void:

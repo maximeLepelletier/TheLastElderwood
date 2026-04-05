@@ -90,10 +90,10 @@ func apply_hit(enemy):
 		return
 
 	if enemy.has_method("take_damage"):
-		enemy.take_damage(damage)
+		enemy.take_damage(damage,"physical")
 
 	if enemy.has_method("apply_dot"):
-		enemy.apply_dot(damage_per_tick,dot_duration,fire_rate,"leaf_storm")
+		enemy.apply_dot(damage_per_tick,dot_duration,fire_rate,"blunt","leaf_storm")
 
 # --------------------------------------------------
 # Tick damage pendant la tempête
@@ -103,4 +103,4 @@ func _on_tick_timer_timeout():
 
 	for enemy in enemies_in_area:
 		if is_instance_valid(enemy) and enemy.has_method("take_damage"):
-			enemy.take_damage(damage)
+			enemy.take_damage(damage,"physical")

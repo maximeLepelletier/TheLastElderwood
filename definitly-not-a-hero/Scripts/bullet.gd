@@ -3,7 +3,7 @@ var speed = 1200
 var RANGE = 800
 var travelled_distance :float = 0
 var bullet_damage :float = 0
-var mode = ""
+var mode = "physical"
 var damage_per_tick :float = 0
 var dot_duration :float =0
 var dot_rate :float =0
@@ -43,7 +43,7 @@ func _on_body_entered(body: Node2D) -> void:
 	match mode:
 		"fire":
 			if body.has_method("apply_dot"):
-				body.apply_dot(damage_per_tick, dot_duration, dot_rate ,mode)
+				body.apply_dot(damage_per_tick, dot_duration, dot_rate ,mode,mode)
 		"explosion":
 			call_deferred("explode")			
 		"thorn":

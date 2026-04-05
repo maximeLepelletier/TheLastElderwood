@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://cxrllc6dllgsq" path="res://Scenes/tower.tscn" id="1_rpqav"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rpqav"]
-radius = 141.59802
+radius = 181.13531
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kyqiw"]
-radius = 145.16887
+radius = 183.02458
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gntrk"]
 bg_color = Color(0.887025, 0.0906761, 0.206275, 1)
@@ -23,7 +23,6 @@ bg_color = Color(0.164706, 0.741176, 0.858824, 1)
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=485548406]
 position = Vector2(749, 2336)
-collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_kyqiw")
 
@@ -47,10 +46,11 @@ shape = SubResource("CircleShape2D_kyqiw")
 
 [node name="LifeBar" type="ProgressBar" parent="." unique_id=196441439]
 unique_name_in_owner = true
-offset_left = -206.0
-offset_top = -191.0
-offset_right = 208.0
-offset_bottom = -164.0
+offset_left = -423.0
+offset_top = 358.0
+offset_right = -9.0
+offset_bottom = 385.0
+scale = Vector2(2, 2)
 theme_override_styles/background = SubResource("StyleBoxFlat_gntrk")
 theme_override_styles/fill = SubResource("StyleBoxFlat_dewec")
 show_percentage = false
@@ -58,10 +58,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ShieldBar" type="ProgressBar" parent="." unique_id=452335523]
 unique_name_in_owner = true
-offset_left = -206.0
-offset_top = -220.0
-offset_right = 208.0
-offset_bottom = -193.0
+offset_left = -423.0
+offset_top = 304.0
+offset_right = -9.0
+offset_bottom = 331.0
+scale = Vector2(2, 2)
 theme_override_styles/background = SubResource("StyleBoxFlat_kyqiw")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5ixxa")
 show_percentage = false

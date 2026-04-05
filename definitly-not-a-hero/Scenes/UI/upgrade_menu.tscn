@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhdqnwu4lp5fr"]
+[gd_scene load_steps=6 format=3 uid="uid://dhdqnwu4lp5fr"]
 
 [ext_resource type="Script" uid="uid://fecu0p4busd2" path="res://Scripts/upgrade_menu.gd" id="1_11363"]
 [ext_resource type="Texture2D" uid="uid://b51yhbdsylo4p" path="res://Assets/UI/panels/wood_level_up_panel_v1.png" id="2_6i826"]
-[ext_resource type="FontFile" uid="uid://2r7c436ff0di" path="res://Assets/Fonts/Comical Cartoon.ttf" id="3_6i826"]
+[ext_resource type="Texture2D" uid="uid://c385tyrnb8kie" path="res://Assets/UI/skill_icon/bushshooter.png" id="3_pgfwh"]
+[ext_resource type="Texture2D" uid="uid://ba0dcgyachy41" path="res://Assets/UI/skill_icon/hp_plus.png" id="4_o853v"]
+[ext_resource type="Texture2D" uid="uid://u24xsw3nthhd" path="res://Assets/UI/skill_icon/leaf_storm.png" id="5_eq66g"]
 
 [node name="Upgrade_menu" type="Node2D"]
 scale = Vector2(0.6, 0.6)
@@ -23,56 +25,63 @@ size_flags_horizontal = 8
 theme_override_constants/separation = 38
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer_1" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = -2
 
-[node name="icon_1" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+[node name="icon_1" type="TextureRect" parent="HBoxContainer/VBoxContainer_1"]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
+texture = ExtResource("3_pgfwh")
 expand_mode = 1
+stretch_mode = 5
 
-[node name="upgrade_1" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="upgrade_1" type="Button" parent="HBoxContainer/VBoxContainer_1"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 15
 autowrap_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer_2" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = -2
 
-[node name="icon_2" type="TextureRect" parent="HBoxContainer/VBoxContainer2"]
+[node name="icon_2" type="TextureRect" parent="HBoxContainer/VBoxContainer_2"]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
+texture = ExtResource("4_o853v")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="upgrade_2" type="Button" parent="HBoxContainer/VBoxContainer2"]
+[node name="upgrade_2" type="Button" parent="HBoxContainer/VBoxContainer_2"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 15
 autowrap_mode = 2
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer_3" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = -2
 
-[node name="icon_3" type="TextureRect" parent="HBoxContainer/VBoxContainer3"]
+[node name="icon_3" type="TextureRect" parent="HBoxContainer/VBoxContainer_3"]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
+texture = ExtResource("5_eq66g")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="upgrade_1" type="Button" parent="HBoxContainer/VBoxContainer3"]
+[node name="upgrade_3" type="Button" parent="HBoxContainer/VBoxContainer_3"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 15
 autowrap_mode = 2
 
 [node name="level_up_label" type="Label" parent="."]
-offset_left = 130.0
+offset_left = 148.333
 offset_top = 130.0
-offset_right = 516.0
+offset_right = 534.333
 offset_bottom = 182.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
-theme_override_fonts/font = ExtResource("3_6i826")
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 45
 text = "Niveau superieur !!!"

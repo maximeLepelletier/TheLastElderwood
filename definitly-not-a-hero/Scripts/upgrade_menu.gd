@@ -8,14 +8,21 @@ func show_choices():
 	for i in range(3):
 		var upgrade_id = choices[i]
 		var data = UpgradeManager.get_upgrade_data(upgrade_id)
-		var button = get_node("HBoxContainer/upgrade_%d" % (i + 1))	
-		var icon = get_node("HBoxContainer/VBoxContainer/icon_%d" % (i + 1))	
+		var button = get_node("HBoxContainer/VBoxContainer_%d/upgrade_%d" % [i+1,i+1])	
+		var icon = get_node("HBoxContainer/VBoxContainer_%d/icon_%d" % [i+1,i+1])	
 		#on debind les ancien event du bouton
 		if button.is_connected("pressed",Callable(self, "_on_upgrade_selected")):
 			button.disconnect("pressed",Callable(self, "_on_upgrade_selected"))
 		button.text = data.text
 		button.connect("pressed", Callable(self, "_on_upgrade_selected").bind(upgrade_id))
-		icon.texture = data.icon
+		#chargement des icons 
+		if data.has("icon"):
+			var path = "res://Assets/UI/skill_icon/" + data.icon
+			if ResourceLoader.exists(path):
+				icon.texture = load(path)
+			else:
+				push_error("Icon not found: " + path)
+		
 
 func _on_upgrade_selected(upgrade_id):
 	player.apply_upgrade(upgrade_id)

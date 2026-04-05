@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dvn85d1fe3fo2"]
+
+[ext_resource type="Script" uid="uid://ch7ul1cvrl4lv" path="res://Scenes/UI/damage_text.gd" id="1_r6lyn"]
+
+[node name="damageText" type="Node2D" unique_id=1922929098]
+scale = Vector2(2, 2)
+script = ExtResource("1_r6lyn")
+
+[node name="damageTextLabel" type="Label" parent="." unique_id=1487583050]
+offset_right = 165.0
+offset_bottom = 51.0
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 75
+text = "456"

@@ -1,5 +1,6 @@
 extends CharacterBody2D
 #DATA---------------------
+#stats
 var enemy_data = {} #contient les donnés Json
 var stats = {} #contient les iables XP/GOLD ETC
 var speed:int
@@ -9,16 +10,33 @@ var current_hp:int
 var gold:int
 var xp:int
 var damage
+#parametres
 var player
 var slowed_amount = 0.0
 var is_in_range = false
-var attack_range=100
+var attack_range=250
 var timer_activated = false
+var direction
+@onready var death_area: Area2D = $deatharea
+@onready var death_collider: CollisionShape2D = $deatharea/deathCollider
+
+
+#damages
 var active_dots: Array = []
 var weaknesses : Array = []
 var resistances : Array = []
 var stacked_effects: Dictionary = {}
 var already_diying: bool = false
+var on_hit_weak_or_resist: String =""
+#modifier
+var modifiers : Array = []
+var modifierinstances : Array = []
+#dashmodifier
+var override_speed :int = 0
+var is_overriding_movement := false
+var debug_label
+#split modifier
+var is_sub_mob = false
 
 
 const XP_ORB = preload("res://Scenes/collectable/xp_orb.tscn")
@@ -28,6 +46,10 @@ const GOLD_COIN = preload("res://Scenes/collectable/gold_coin.tscn")
 
 
 func _process(delta: float) -> void:		
+	#gestion des modifiers	
+	for mod in modifierinstances:
+		if has_method("process"):
+			mod._process(delta)		
 	var dist = global_position.distance_to(player.global_position)
 	#gestion flip sprite
 	if global_position.x > player.global_position.x:
@@ -45,13 +67,19 @@ func _process(delta: float) -> void:
 		if not timer_activated:
 			%Timer.start()
 			timer_activated=true
-	else:
-		var direction = global_position.direction_to(player.global_position)
-		velocity = direction * speed
-		#if not is_attack_player:
-		var collide = move_and_collide(velocity * delta)
-		if collide:
-			is_in_range=true
+	else:	
+			if override_speed != 0 :
+				if direction != null and override_speed !=null:
+					velocity = direction * override_speed 
+			else:
+				direction = global_position.direction_to(player.global_position)
+				velocity = direction * speed 
+				#if not is_attack_player:
+			var collide = move_and_collide(velocity * delta)
+			if collide:
+				is_in_range=true
+			
+	
 	#GERSTIONNAIRE DES DOTS
 	if active_dots.is_empty():
 		return
@@ -63,25 +91,44 @@ func _process(delta: float) -> void:
 			take_damage(dot["damage"],dot["source"])
 		if dot["elapsed"] >= dot["duration"]:
 			active_dots.erase(dot)
+			
 						
-func take_damage(damage, damage_type: String = "physical"):
-	%Animation.play("hurt")
+func take_damage(damage:float, damage_type: String):
+	var damage_data = {
+		"damage": damage,
+		"damage_type": damage_type
+	}
+	for mod in modifierinstances.duplicate():
+		if mod.has_method("on_hit"):
+			damage_data = mod.on_hit(damage_data)
+	if damage_data.damage <= 0:
+		return 
+		
+	#%Animation.play("hurt")
 	set_hit_type(damage_type)
 	
 	%hit_type.emitting = true
-	var final_damage = compute_type_damage(damage, damage_type)
-	current_hp-=damage
+	var final_damage = compute_type_damage(damage_data.damage, damage_data.damage_type)
+	DamageManager.spawn(global_position, damage_data.damage, damage_data.damage_type,on_hit_weak_or_resist)
+	current_hp-=damage_data.damage
 	if current_hp<=0:	
 		die()
+
+func heal(amount:float):
+	#si jamais supérieur a max hp on garde maxhp 
+	current_hp = min(current_hp+amount,max_hp)
+	DamageManager.spawn(global_position, amount, "heal" ,"")
+
 	
 
-func apply_dot(damage: float, duration: float, tick_rate: float , source: String ):
+func apply_dot(damage: float, duration: float, tick_rate: float ,damage_type: String, source: String ):
 	active_dots.append({
 		"damage": damage,
 		"duration": duration,
 		"tick_rate": tick_rate,
 		"elapsed": 0.0,
 		"tick_elapsed": 0.0,
+		"damage_type":damage_type,
 		"source": source
 	})
 func compute_type_damage(damage: float, damage_type: String) -> float:
@@ -90,9 +137,10 @@ func compute_type_damage(damage: float, damage_type: String) -> float:
 	# Vérifie si le type existe dans le JSON de l'ennemi
 	if "weaknesses" in stats and damage_type in stats["weaknesses"]:
 		multiplier *= 1.5  # +50% dégâts
+		on_hit_weak_or_resist = "weaknesses"
 	if "resistances" in stats and damage_type in stats["resistances"]:
 		multiplier *= 0.5  # -50% dégâts
-	
+		on_hit_weak_or_resist = "resistances"
 	return damage * multiplier
 
 func set_hit_type(damage_type):
@@ -108,11 +156,19 @@ func attack():
 		player.take_damage(damage)
 
 func die() -> void:
+	print("Layer:", str(death_area.collision_layer), "Mask:", str(death_area.collision_mask))
+	for body in death_area.get_overlapping_bodies():
+		print("Detected body:", str(body))
+		
 	if not already_diying:
-		Events.enemy_died.emit()
-		already_diying=true
-		spawn_gold(gold)
-		spawn_xp_orb(xp)
+		if not is_sub_mob:
+			Events.enemy_died.emit()
+			already_diying=true
+			for mod in modifierinstances.duplicate():
+				if mod.has_method("on_death"):
+					mod.on_death()
+			spawn_gold(gold)
+			spawn_xp_orb(xp)
 		queue_free()
 	
 #region Stacked effect
@@ -171,11 +227,25 @@ func init(enemy_id: String):
 		speed=base_speed
 		gold = stats["gold_reward"]
 		xp = stats["xp_reward"]
-		weaknesses = stats.get("weaknesses", [])
-		resistances = stats.get("resistances", [])
+		weaknesses = stats.get("weaknesses", []).duplicate(true)
+		resistances = stats.get("resistances", []).duplicate(true)
 		player = get_tree().get_first_node_in_group("player")
 		current_hp = max_hp
+		modifiers = stats.get("modifiers", []).duplicate(true)
+		death_collider.shape.radius = stats["death_collider_radius"]
+	for mod_data in modifiers:
+		var mod = ModifierManager.create(mod_data)
+		mod.attach(self)
+		modifierinstances.append(mod)
+		settingdeathCollider(mod_data)
 
+func settingdeathCollider(data:Dictionary):
+	match data.type:
+		"healondeath":
+			death_area.collision_mask |= 1<<1
+		"explosionondeath":
+			death_area.collision_mask |= 1<<0
+			
 func apply_slow(percent):
 	print("speed : "+ str(speed))
 	slowed_amount = max(slowed_amount, percent) # garde le plus fort slow
