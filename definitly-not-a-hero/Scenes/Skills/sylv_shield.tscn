@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b65dcm268u3u1"]
 
-[ext_resource type="Script" uid="uid://b3mfg1g2gbkod" path="res://Scenes/Skills/sylv_shield.gd" id="1_6414t"]
+[ext_resource type="Script" uid="uid://b3mfg1g2gbkod" path="res://Scripts/skills/sylv_shield.gd" id="1_6414t"]
 [ext_resource type="Texture2D" uid="uid://bnddmgvv55ce4" path="res://Assets/sprites/skills/sylv_shield.png" id="1_uqckl"]
 [ext_resource type="Texture2D" uid="uid://6e0hlfa0gsae" path="res://Assets/sprites/skills/leaf_white.png" id="3_r8nox"]
 

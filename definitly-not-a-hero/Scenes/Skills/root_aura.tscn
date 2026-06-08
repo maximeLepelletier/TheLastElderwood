@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://g8t1qw3ojf83"]
 
-[ext_resource type="Script" uid="uid://dl2m1t05x210s" path="res://Scenes/Skills/root_aura.gd" id="1_xixwl"]
+[ext_resource type="Script" uid="uid://dl2m1t05x210s" path="res://Scripts/skills/root_aura.gd" id="1_xixwl"]
 [ext_resource type="Texture2D" uid="uid://n27fqrs3kw8p" path="res://Assets/sprites/skills/root_area.png" id="2_bg5b2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xcowa"]

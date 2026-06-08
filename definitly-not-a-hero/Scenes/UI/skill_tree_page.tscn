@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://c23058wvff7ev"]
+[gd_scene format=3 uid="uid://c23058wvff7ev"]
 
-[ext_resource type="Script" uid="uid://e5iarasjqye" path="res://Scripts/SkillTreeController.gd" id="1_agrso"]
+[ext_resource type="Script" uid="uid://e5iarasjqye" path="res://Scripts/managers/SkillTreeController.gd" id="1_agrso"]
 [ext_resource type="Texture2D" uid="uid://bbqho51go3tcu" path="res://Assets/splashart/skilltree revisited.png" id="1_g2hyj"]
 [ext_resource type="Script" uid="uid://bo0tncqmwuxmu" path="res://Scenes/UI/drag_view.gd" id="1_gh4nt"]
 [ext_resource type="PackedScene" uid="uid://yybnq7rija4p" path="res://Scenes/UI/skill_tree_panel.tscn" id="1_ytikp"]

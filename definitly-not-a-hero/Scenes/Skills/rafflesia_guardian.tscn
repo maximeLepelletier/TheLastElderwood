@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://deejv44cnnbq4"]
+
+[ext_resource type="Script" uid="uid://cfqv2e1ikxuyj" path="res://rafflesia_guardian.gd" id="1_wcdug"]
+[ext_resource type="Texture2D" uid="uid://dlycrf6tn78nj" path="res://Assets/Simple Shapes/Pentagon.png" id="2_7rv3h"]
+[ext_resource type="Texture2D" uid="uid://bq6suqqc8815w" path="res://Assets/Simple Shapes/Circle.png" id="3_0d5hr"]
+
+[node name="rafflesia_guardian" type="Node2D" unique_id=1705156878]
+process_mode = 1
+script = ExtResource("1_wcdug")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=91170911]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_7rv3h")
+
+[node name="weaponrotation" type="Marker2D" parent="." unique_id=1833122138]
+
+[node name="weapon" type="Sprite2D" parent="weaponrotation" unique_id=399458957]
+position = Vector2(0, -160.99998)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("3_0d5hr")
+
+[node name="ShootingPoint" type="Marker2D" parent="weaponrotation" unique_id=98246931]
+unique_name_in_owner = true
+position = Vector2(0, -161)

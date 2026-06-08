@@ -5,8 +5,8 @@ var enemy_data = {} #contient les donnés Json
 var stats = {} #contient les iables XP/GOLD ETC
 var speed:int
 var base_speed:int
-var max_hp:int
-var current_hp:int
+var max_hp:float
+var current_hp:float
 var gold:int
 var xp:int
 var damage
@@ -20,14 +20,22 @@ var direction
 @onready var death_area: Area2D = $deatharea
 @onready var death_collider: CollisionShape2D = $deatharea/deathCollider
 
-
+#debuff
+var is_stunned
+var is_eroded
+var is_slowed
+var is_rooted
+var is_binded
+var bind_ratio :float = 0.1
 #damages
 var active_dots: Array = []
+var active_debuff: Array = []
 var weaknesses : Array = []
 var resistances : Array = []
 var stacked_effects: Dictionary = {}
 var already_diying: bool = false
 var on_hit_weak_or_resist: String =""
+var damage_source
 #modifier
 var modifiers : Array = []
 var modifierinstances : Array = []
@@ -67,6 +75,8 @@ func _process(delta: float) -> void:
 		if not timer_activated:
 			%Timer.start()
 			timer_activated=true
+	elif is_stunned:
+		velocity = Vector2.ZERO		
 	else:	
 			if override_speed != 0 :
 				if direction != null and override_speed !=null:
@@ -77,27 +87,29 @@ func _process(delta: float) -> void:
 				#if not is_attack_player:
 			var collide = move_and_collide(velocity * delta)
 			if collide:
-				is_in_range=true
-			
+				is_in_range=true			
 	
 	#GERSTIONNAIRE DES DOTS
-	if active_dots.is_empty():
-		return
-	for dot in active_dots.duplicate():
-		dot["elapsed"] += delta
-		dot["tick_elapsed"] += delta
-		if dot["tick_elapsed"] >= dot["tick_rate"]:
-			dot["tick_elapsed"] = 0.0
-			take_damage(dot["damage"],dot["source"])
-		if dot["elapsed"] >= dot["duration"]:
-			active_dots.erase(dot)
-			
-						
-func take_damage(damage:float, damage_type: String):
+	update_dots(delta)	
+	#gestionnaire des debuffs
+	update_debuffs(delta)
+	active_debuff = active_debuff.filter(func(d):
+		return d.active or d.cooldown_left > 0)
+	
+#region damage manager					
+func take_damage(damage:float, damage_type: String,damage_source: Variant=null,can_bind:bool = false):
 	var damage_data = {
 		"damage": damage,
-		"damage_type": damage_type
+		"damage_type": damage_type,
+		"damage_source": damage_source,
+		"can_bind":can_bind
 	}
+	if is_binded and damage_data.can_bind:
+		if player.Tower.unlocked_skills.has("root_aura"):
+			bind_ratio = player.Tower.get_stat("root_aura","binding_damage_limit")
+		propagate_bind_damage(damage*bind_ratio)			
+		
+		
 	for mod in modifierinstances.duplicate():
 		if mod.has_method("on_hit"):
 			damage_data = mod.on_hit(damage_data)
@@ -113,6 +125,13 @@ func take_damage(damage:float, damage_type: String):
 	current_hp-=damage_data.damage
 	if current_hp<=0:	
 		die()
+
+func propagate_bind_damage(damage):
+	var binded =get_tree().get_nodes_in_group("binded")
+	for enemy in binded:
+		if enemy == self:
+			continue			
+		enemy.take_damage(damage,"bind",null,false)
 
 func heal(amount:float):
 	#si jamais supérieur a max hp on garde maxhp 
@@ -131,6 +150,66 @@ func apply_dot(damage: float, duration: float, tick_rate: float ,damage_type: St
 		"damage_type":damage_type,
 		"source": source
 	})
+func update_dots(delta):
+	if active_dots.is_empty():
+		return
+	for dot in active_dots.duplicate():
+		dot["elapsed"] += delta
+		dot["tick_elapsed"] += delta
+		if dot["tick_elapsed"] >= dot["tick_rate"]:
+			dot["tick_elapsed"] = 0.0
+			take_damage(dot["damage"],dot["source"])
+		if dot["elapsed"] >= dot["duration"]:
+			active_dots.erase(dot)
+			
+func apply_debuff(duration :float,cooldown: float ,debuff_name: String,value = null):
+	for debuff in active_debuff:
+		if debuff.name == debuff_name:
+			return  # déjà appliqué ou en cooldown
+	active_debuff.append({		
+		"name": debuff_name,
+		"duration": duration,
+		"time_left":duration,
+		"cooldown": cooldown,
+		"cooldown_left": cooldown,
+		"value":value,
+		"active": true
+	})
+
+func update_debuffs(delta):
+	for debuff in active_debuff:		
+		if debuff.active:
+			debuff.time_left -= delta			
+			if debuff.time_left <= 0:
+				debuff.active = false
+				debuff.cooldown_left = debuff.cooldown		
+		else:
+			debuff.cooldown_left -= delta
+	compute_debuffs()
+			
+func compute_debuffs():
+	#ajouter ici les parametres:
+	is_stunned = false	
+	is_eroded = false
+	is_slowed = false
+	is_rooted = false
+	for debuff in active_debuff:
+		if not debuff.active:
+			continue		
+		match debuff.name:
+			"stun":
+				is_stunned = true
+			"erode":
+				is_eroded = true
+			"slow":
+				is_slowed=true
+				apply_slow(debuff.value,debuff.duration)
+			"rooted":
+				is_rooted=true	
+			"binded":
+				is_binded=true
+				add_to_group("binded")
+		
 func compute_type_damage(damage: float, damage_type: String) -> float:
 	# Par défaut, pas de modification
 	var multiplier = 1.0
@@ -138,9 +217,10 @@ func compute_type_damage(damage: float, damage_type: String) -> float:
 	if "weaknesses" in stats and damage_type in stats["weaknesses"]:
 		multiplier *= 1.5  # +50% dégâts
 		on_hit_weak_or_resist = "weaknesses"
-	if "resistances" in stats and damage_type in stats["resistances"]:
-		multiplier *= 0.5  # -50% dégâts
-		on_hit_weak_or_resist = "resistances"
+	if not is_eroded:
+		if "resistances" in stats and damage_type in stats["resistances"]:
+			multiplier *= 0.5  # -50% dégâts
+			on_hit_weak_or_resist = "resistances"
 	return damage * multiplier
 
 func set_hit_type(damage_type):
@@ -151,12 +231,13 @@ func set_hit_type(damage_type):
 			%hit_type.color = Color("ffa119")
 		"thorn":
 			%hit_type.color = Color("077384")
+		"thunder":
+			%hit_type.color = Color("abab16ff")
 func attack():
 	if player and player.has_method("take_damage"):
 		player.take_damage(damage)
 
 func die() -> void:
-	print("Layer:", str(death_area.collision_layer), "Mask:", str(death_area.collision_mask))
 	for body in death_area.get_overlapping_bodies():
 		print("Detected body:", str(body))
 		
@@ -169,7 +250,14 @@ func die() -> void:
 					mod.on_death()
 			spawn_gold(gold)
 			spawn_xp_orb(xp)
-		queue_free()
+			if is_rooted:			
+				Events.growth_root.emit()
+	if player.Tower.unlocked_skills.has("rafflesia_guardian"):
+		player.Tower.try_death_summon_skill("rafflesia_guardian",global_position)	
+	queue_free()
+	
+
+#endregion
 	
 #region Stacked effect
 func add_stack(effect_name: String, value: float, max_stack: int):
@@ -233,6 +321,7 @@ func init(enemy_id: String):
 		current_hp = max_hp
 		modifiers = stats.get("modifiers", []).duplicate(true)
 		death_collider.shape.radius = stats["death_collider_radius"]
+
 	for mod_data in modifiers:
 		var mod = ModifierManager.create(mod_data)
 		mod.attach(self)
@@ -246,17 +335,21 @@ func settingdeathCollider(data:Dictionary):
 		"explosionondeath":
 			death_area.collision_mask |= 1<<0
 			
-func apply_slow(percent):
+func apply_slow(percent :float , duration :float):
 	print("speed : "+ str(speed))
 	slowed_amount = max(slowed_amount, percent) # garde le plus fort slow
 	speed = base_speed * (1.0 - slowed_amount)
 	print("apply : "+ str(slowed_amount))
 	print("speed : "+ str(speed))
+	await get_tree().create_timer(duration).timeout	
+	remove_slow(percent)
+
 
 func remove_slow(percent):
-	slowed_amount = max(0.0, slowed_amount - percent)
-	speed = speed * (1.0 - slowed_amount)
-	print("apply slow : "+str((1.0 - slowed_amount)))
+	#slowed_amount = max(0.0, slowed_amount - percent)
+	#speed = speed * (1.0 - slowed_amount)
+	#print("apply slow : "+str((1.0 - slowed_amount)))
+	speed = base_speed
 
 func _on_timer_timeout() -> void:
 	attack()

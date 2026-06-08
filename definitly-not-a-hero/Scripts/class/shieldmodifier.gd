@@ -14,7 +14,7 @@ func on_hit(damage_data):
 		flash_shield()
 		if hits_left <= 0:
 			break_shield()
-		return 0 
+		damage_data.damage = 0		
 	return damage_data
 	
 func flash_shield():

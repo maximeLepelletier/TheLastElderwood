@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b2dfoa51ay3d1"]
+
+[ext_resource type="Script" uid="uid://kfm2tqaniouv" path="res://Scripts/skills/lichen_bullet.gd" id="1_yrpi6"]
+[ext_resource type="Texture2D" uid="uid://b8npklddwl76a" path="res://Assets/Simple Shapes/Circle 2.png" id="2_oqwqq"]
+[ext_resource type="Texture2D" uid="uid://bq6suqqc8815w" path="res://Assets/Simple Shapes/Circle.png" id="3_oqwqq"]
+
+[node name="lichen_bullet" type="Node2D" unique_id=1824541303]
+script = ExtResource("1_yrpi6")
+
+[node name="shadow" type="Sprite2D" parent="." unique_id=441836916]
+modulate = Color(0.14044744, 0.14044744, 0.14044744, 0.47058824)
+scale = Vector2(1.0039063, 1.0039063)
+texture = ExtResource("3_oqwqq")
+
+[node name="projectile" type="Sprite2D" parent="." unique_id=1364695187]
+texture = ExtResource("2_oqwqq")

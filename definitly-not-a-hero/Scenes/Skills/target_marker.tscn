@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbuxiekoyko15"]
+[gd_scene format=3 uid="uid://cbuxiekoyko15"]
 
 [ext_resource type="Texture2D" uid="uid://b8npklddwl76a" path="res://Assets/Simple Shapes/Circle 2.png" id="1_jjpnl"]
-[ext_resource type="Script" uid="uid://br1fkttipvme" path="res://Scenes/Skills/target_marker.gd" id="2_ep67b"]
+[ext_resource type="Script" uid="uid://br1fkttipvme" path="res://Scripts/skills/target_marker.gd" id="2_ep67b"]
 
 [node name="target_marker" type="Sprite2D"]
 modulate = Color(1, 0.0745098, 0, 1)

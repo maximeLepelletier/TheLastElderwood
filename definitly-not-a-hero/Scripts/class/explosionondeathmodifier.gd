@@ -23,6 +23,6 @@ func apply_explosion_area():
 		if enemy == owner:
 			continue
 		if enemy.has_method("take_damage"):
-			enemy.take_damage(damage)	
+			enemy.take_damage(damage,"physical","explosion_death")	
 	
 	area.monitoring = false

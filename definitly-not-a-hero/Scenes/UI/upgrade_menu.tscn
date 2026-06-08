@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhdqnwu4lp5fr"]
+[gd_scene format=3 uid="uid://dhdqnwu4lp5fr"]
 
 [ext_resource type="Script" uid="uid://fecu0p4busd2" path="res://Scripts/upgrade_menu.gd" id="1_11363"]
 [ext_resource type="Texture2D" uid="uid://b51yhbdsylo4p" path="res://Assets/UI/panels/wood_level_up_panel_v1.png" id="2_6i826"]
@@ -6,16 +6,16 @@
 [ext_resource type="Texture2D" uid="uid://ba0dcgyachy41" path="res://Assets/UI/skill_icon/hp_plus.png" id="4_o853v"]
 [ext_resource type="Texture2D" uid="uid://u24xsw3nthhd" path="res://Assets/UI/skill_icon/leaf_storm.png" id="5_eq66g"]
 
-[node name="Upgrade_menu" type="Node2D"]
+[node name="Upgrade_menu" type="Node2D" unique_id=912246308]
 scale = Vector2(0.6, 0.6)
 script = ExtResource("1_11363")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=631034626]
 position = Vector2(317.5, 343.333)
 scale = Vector2(1.55637, 1.11656)
 texture = ExtResource("2_6i826")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1887236998]
 process_mode = 3
 offset_left = -57.0
 offset_top = 194.0
@@ -25,58 +25,58 @@ size_flags_horizontal = 8
 theme_override_constants/separation = 38
 alignment = 1
 
-[node name="VBoxContainer_1" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer_1" type="VBoxContainer" parent="HBoxContainer" unique_id=1493902378]
 layout_mode = 2
 
-[node name="icon_1" type="TextureRect" parent="HBoxContainer/VBoxContainer_1"]
+[node name="icon_1" type="TextureRect" parent="HBoxContainer/VBoxContainer_1" unique_id=1742688100]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 texture = ExtResource("3_pgfwh")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="upgrade_1" type="Button" parent="HBoxContainer/VBoxContainer_1"]
+[node name="upgrade_1" type="Button" parent="HBoxContainer/VBoxContainer_1" unique_id=1277833641]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 15
 autowrap_mode = 2
 
-[node name="VBoxContainer_2" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer_2" type="VBoxContainer" parent="HBoxContainer" unique_id=778043262]
 layout_mode = 2
 
-[node name="icon_2" type="TextureRect" parent="HBoxContainer/VBoxContainer_2"]
+[node name="icon_2" type="TextureRect" parent="HBoxContainer/VBoxContainer_2" unique_id=1964961402]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 texture = ExtResource("4_o853v")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="upgrade_2" type="Button" parent="HBoxContainer/VBoxContainer_2"]
+[node name="upgrade_2" type="Button" parent="HBoxContainer/VBoxContainer_2" unique_id=1986740444]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 15
 autowrap_mode = 2
 
-[node name="VBoxContainer_3" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer_3" type="VBoxContainer" parent="HBoxContainer" unique_id=473535671]
 layout_mode = 2
 
-[node name="icon_3" type="TextureRect" parent="HBoxContainer/VBoxContainer_3"]
+[node name="icon_3" type="TextureRect" parent="HBoxContainer/VBoxContainer_3" unique_id=1644774975]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 texture = ExtResource("5_eq66g")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="upgrade_3" type="Button" parent="HBoxContainer/VBoxContainer_3"]
+[node name="upgrade_3" type="Button" parent="HBoxContainer/VBoxContainer_3" unique_id=583421327]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 15
 autowrap_mode = 2
 
-[node name="level_up_label" type="Label" parent="."]
+[node name="level_up_label" type="Label" parent="." unique_id=1259528291]
 offset_left = 148.333
 offset_top = 130.0
 offset_right = 534.333

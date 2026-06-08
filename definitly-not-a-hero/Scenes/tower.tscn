@@ -58,8 +58,13 @@ wait_time = 2.0
 unique_name_in_owner = true
 wait_time = 10.0
 
+[node name="stun_lichen_Timer" type="Timer" parent="." unique_id=743689488]
+unique_name_in_owner = true
+wait_time = 10.0
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="wood_trunk_Timer" to="." method="_on_wood_trunk_timer_timeout"]
 [connection signal="timeout" from="vamp_sting_Timer" to="." method="_on_vamp_sting_timer_timeout"]
 [connection signal="timeout" from="sylv_bomb_Timer" to="." method="_on_sylv_bomb_timer_timeout"]
 [connection signal="timeout" from="leaf_storm_Timer" to="." method="_on_leaf_storm_timer_timeout"]
+[connection signal="timeout" from="stun_lichen_Timer" to="." method="_on_stun_lichen_timer_timeout"]

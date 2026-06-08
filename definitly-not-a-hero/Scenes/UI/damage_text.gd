@@ -17,7 +17,9 @@ func setup(damage: float, type: String,pos: Vector2,Weak_Or_Res: String):
 		"explosion":
 			label.modulate = Color(0.9, 0.8, 0.1)	
 		"heal":
-			label.modulate = Color(0.566, 0.891, 0.53, 1.0)	
+			label.modulate = Color(0.566, 0.891, 0.53, 1.0)
+		"crit":
+			label.modulate = Color(0.629, 0.115, 0.106, 1.0)	
 		_:
 			label.modulate = Color(1,1,1)
 	match Weak_Or_Res:

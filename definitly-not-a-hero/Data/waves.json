@@ -3,13 +3,14 @@
 	{
 	  "id": 0,
 	  "enemies": [
-		{ "type": "bat", "count": 10, "spawn_delay": 0.6 }
+		{ "type": "bat", "count": 40, "spawn_delay": 1 }
 	  ]
 	},
 	{
 	  "id": 1,
-	"boss": [
-		{ "type": "boss1_enemy", "count": 1, "spawn_delay": 0.8 }
+	"enemies": [
+		{ "type": "white_square_enemy", "count": 12, "spawn_delay": 0.8 },
+		{ "type": "white_circle_enemy", "count": 12, "spawn_delay": 0.7 }
 	  ]
 	 
 	},
@@ -47,6 +48,10 @@
 		{ "type": "white_square_enemy", "count": 15, "spawn_delay": 0.5 },
 		{ "type": "white_circle_enemy", "count": 15, "spawn_delay": 0.5 },
 
+	  ]
+	,
+	"boss": [
+		{ "type": "boss1_enemy", "count": 1, "spawn_delay": 0.8 }
 	  ]
 	}
   ]

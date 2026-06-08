@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c5ywkelqmaexv"]
 
-[ext_resource type="Script" uid="uid://ce6iiahfbe5m7" path="res://Scenes/Skills/vamp_sting.gd" id="1_65771"]
+[ext_resource type="Script" uid="uid://ce6iiahfbe5m7" path="res://Scripts/skills/vamp_sting.gd" id="1_65771"]
 [ext_resource type="Texture2D" uid="uid://bm07sk4r8cgui" path="res://Assets/sprites/skills/vamp_sting_2.png" id="2_ou2q0"]
 [ext_resource type="Texture2D" uid="uid://daxvtq8uxyafn" path="res://Assets/textures/2.png" id="3_ou2q0"]
 

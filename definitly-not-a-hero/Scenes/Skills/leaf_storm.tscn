@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://1ulivlgf6ulm"]
 
-[ext_resource type="Script" uid="uid://cw68uqgt7utu7" path="res://Scenes/Skills/leaf_storm.gd" id="1_soo8j"]
+[ext_resource type="Script" uid="uid://cw68uqgt7utu7" path="res://Scripts/skills/leaf_storm.gd" id="1_soo8j"]
 [ext_resource type="Texture2D" uid="uid://6e0hlfa0gsae" path="res://Assets/sprites/skills/leaf_white.png" id="1_ttvxd"]
 [ext_resource type="Texture2D" uid="uid://daxvtq8uxyafn" path="res://Assets/textures/2.png" id="2_soo8j"]
 
@@ -74,6 +74,10 @@ color_initial_ramp = SubResource("Gradient_w0xvg")
 wait_time = 4.0
 autostart = true
 
+[node name="tick_rate" type="Timer" parent="." unique_id=1565782849]
+autostart = true
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="tick_rate" to="." method="_on_tick_rate_timeout"]

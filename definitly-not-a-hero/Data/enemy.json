@@ -17,7 +17,7 @@
 	  "name": "Circle_enemy",
 	  "hp": 30,
 	  "damage": 5,
-	  "speed": 0,
+	  "speed": 200,
 	  "xp_reward": 15,
 	  "gold_reward": 3,
 	  "weaknesses": ["fire"],
@@ -53,6 +53,7 @@
 					{"type": "healondeath","amount": 10},
 					{"type": "explosionondeath","damage": 100},
 					{"type": "intangible","duration": 3,"cooldown":3},
+					{"type": "splitondeath","amount": 2,"enemy":"white_square_enemy"}
 
 					]
 	},
@@ -67,9 +68,6 @@
 	  "weaknesses": ["fire"],
 	  "resistances": ["blunt"],
 	  "death_collider_radius":600,
-	  "modifiers" : [
-					{"type": "splitondeath","amount": 2,"enemy":"white_square_enemy"},
-					]
 	},
 	{
 	  "id": "boss1_enemy",

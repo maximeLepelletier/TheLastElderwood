@@ -22,20 +22,26 @@ config/icon="res://Assets/icon.svg"
 [autoload]
 
 Global="*res://Scripts/Global.gd"
-EnemyManager="*res://Scripts/EnemyManager.gd"
-WaveManager="*res://Scripts/wave_manager.gd"
-UpgradeManager="*res://Scripts/upgrade_manager.gd"
-ComboManager="*res://Scripts/combo_manager.gd"
+EnemyManager="*res://Scripts/managers/EnemyManager.gd"
+WaveManager="*res://Scripts/managers/wave_manager.gd"
+UpgradeManager="*res://Scripts/managers/upgrade_manager.gd"
+ComboManager="*res://Scripts/managers/combo_manager.gd"
 Events="*res://Scripts/events.gd"
-Gamedata="*res://Scripts/gamedata.gd"
-Playerdata="*res://Scripts/playerdata.gd"
-DamageManager="*res://Scripts/damage_manager.gd"
+Gamedata="*res://Scripts/data/gamedata.gd"
+Playerdata="*res://Scripts/data/playerdata.gd"
+DamageManager="*res://Scripts/managers/damage_manager.gd"
+Audiomanager="*uid://cxwffdacmnbve"
+
+[debug]
+
+settings/stdout/print_fps=true
 
 [display]
 
 window/size/viewport_width=720
 window/size/viewport_height=1280
 window/stretch/mode="viewport"
+window/handheld/orientation=1
 
 [gui]
 

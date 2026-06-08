@@ -3,9 +3,9 @@ extends CharacterBody2D
 #CONSTANTES:
 # 100 / 130 / 170 /290/370/470/600/760/950/1200/1500/1850/2300/2900/3600/4500/5600/7000
 const XP_TABLE = [
-	10, 50, 50, 50, 50,
+	10, 20, 30, 40, 50,
 	50, 50, 50, 50, 50,
-	1200, 1500, 1850, 2300, 2900,
+	50, 50, 50, 2300, 2900,
 	3600, 4500, 5600, 7000
 ]
 #VARIABLES
@@ -22,6 +22,7 @@ var shield_max_hp
 var shield_current_HP = 0
 var shield_active = false
 var shield_regen
+var shield_reflect
 #SIGNALS
 var skill_up ={}
 
@@ -98,7 +99,7 @@ func add_hp_max(value):
 
 func take_damage(value):
 	if shield_active:
-		shield_take_damage(value)
+		shield_take_damage(value)			
 	else:
 		current_HP-= value
 			
@@ -118,6 +119,7 @@ func _on_shield_unlocked(shield_hp,regen):
 	shield_max_hp = shield_hp
 	shield_current_HP = shield_hp
 	shield_regen = regen
+	shield_reflect = false
 	%ShieldBar.max_value = shield_hp
 	%ShieldBar.value = shield_hp	
 	%ShieldBar.visible = true

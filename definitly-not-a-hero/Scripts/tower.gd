@@ -59,14 +59,18 @@ func _physics_process(_delta: float) -> void:
 	update_rotation(TargetEnnemy, _delta)
 	if TargetEnnemy == null or is_rotating:
 		%Timer.paused=true
-		%wood_trunk_Timer.paused=true		
+		%wood_trunk_Timer.paused=true
 		%vamp_sting_Timer.paused=true
-		%sylv_bomb_Timer.paused=true		
+		%sylv_bomb_Timer.paused=true
+		%leaf_storm_Timer.paused = true
+		%stun_lichen_Timer.paused = true
 	else:
 		%Timer.paused=false
-		%wood_trunk_Timer.paused=false		
-		%vamp_sting_Timer.paused=false		
-		%sylv_bomb_Timer.paused=false		
+		%wood_trunk_Timer.paused=false
+		%vamp_sting_Timer.paused=false
+		%sylv_bomb_Timer.paused=false
+		%leaf_storm_Timer.paused = false
+		%stun_lichen_Timer.paused = false
 
 func get_target(mode: TargetMode, origin: Vector2) -> TargetData:
 	var t :TargetData
@@ -131,7 +135,7 @@ func get_farthest_enemy() -> Node2D:
 			farthest_enemy = enemy
 	return farthest_enemy
 	
-func get_largest_group_enemy(cluster_radius := 80.0) -> Node2D:
+func get_largest_group_enemy(cluster_radius := 100.0) -> Node2D:
 	var enemies = get_overlapping_bodies()
 	var best_enemy = null
 	var best_count = 0
@@ -171,6 +175,11 @@ func get_manual_target_data(origin: Vector2) -> TargetData:
 	t.is_manual = true
 	t.position = get_world_target_position(origin)
 	return t	
+	
+func get_rotated_target(target:Vector2,angle_deg:float) -> Vector2:
+	var direction = (target - global_position).normalized()
+	direction = direction.rotated(deg_to_rad(angle_deg))
+	return global_position + direction * 1000
 
 #endregion
  
@@ -211,14 +220,40 @@ func shoot(projectile,stats: Dictionary,target_position):
 	root.add_child(new_projectile)
 
 func _on_wood_trunk_timer_timeout() -> void:
+	var count = get_stat("wood_trunk","throw_count")
 	var stats : Dictionary
 	stats = {
 	"damage":get_stat("wood_trunk","damage"),
 	"speed":get_stat("wood_trunk","speed"),
 	"range":get_stat("wood_trunk","range"),
-	"scale":get_stat("wood_trunk","scale")
+	"width":get_stat("wood_trunk","width"),
+	"height":get_stat("wood_trunk","height"),
+	"mode":get_property("wood_trunk","mode"),
+	#rock
+	"rock_width":get_stat("wood_trunk","rock_width"),
+	"rock_height":get_stat("wood_trunk","rock_height"),
+	"rock_damage":get_stat("wood_trunk","rock_damage"),
+	"rock_range":get_stat("wood_trunk","rock_range"),
+	"rock_speed":get_stat("wood_trunk","rock_speed"),	
+	"rock_scale":get_stat("wood_trunk","rock_scale"),	
+	"rock_growth_scale":get_stat("wood_trunk","rock_growth_scale"),	
+	"rock_growth_damage_value" :get_stat("wood_trunk","rock_growth_damage_value"),
+	#throw_back
+	"throw_width":get_stat("wood_trunk","throw_width"),
+	"throw_height":get_stat("wood_trunk","throw_height"),
+	"throw_damage":get_stat("wood_trunk","throw_damage"),
+	"throw_range":get_stat("wood_trunk","throw_range"),
+	"throw_speed":get_stat("wood_trunk","throw_speed"),
+	"throw_back":get_stat("wood_trunk","throw_back"),
+	"throw_duration":get_stat("wood_trunk","throw_duration"),
+	"throw_count":count,
+	"throw_growth_value": get_stat("wood_trunk","throw_growth_push_value"),
 	}
 	shoot(Gamedata.WOOD_TRUNK,stats,get_target(TargetMode.FARTHEST,manual_target_position))
+	if count>1: #permet le tir des throw simultanés
+		for i in range(count-1):
+			await get_tree().create_timer(0.5,false).timeout			
+			shoot(Gamedata.WOOD_TRUNK,stats,get_target(TargetMode.DENSEST,manual_target_position))
 
 func _on_vamp_sting_timer_timeout() -> void:
 	var stats: Dictionary
@@ -250,11 +285,96 @@ func _on_leaf_storm_timer_timeout() -> void:
 		"radius":get_stat("leaf_storm","radius"),
 		"dot_rate":get_stat("leaf_storm","dot_rate"),
 		"speed":get_stat("leaf_storm","speed"),
-		"fire_rate":get_stat("leaf_storm","fire_rate")
+		"fire_rate":get_stat("leaf_storm","fire_rate"),
+		"razor_tick_rate":get_stat("leaf_storm","razor_tick_rate"),
+		"razor_damage":get_stat("leaf_storm","razor_damage"),
+		"razor_crit_rate":get_stat("leaf_storm","razor_crit_rate"),
+		"sand_debuff_duration":get_stat("leaf_storm","sand_debuff_duration"),
+		"sand_slow":get_stat("leaf_storm","sand_slow"),
+		"sand_debuff_cooldown":get_stat("leaf_storm","sand_debuff_cooldown"),
+		"sand_damage":get_stat("leaf_storm","sand_damage"),
+		"sand_tick_rate":get_stat("leaf_storm","sand_tick_rate"),
+		"mode":get_property("leaf_storm","mode")
 		}
 	shoot(Gamedata.LEAF_STORM,stats,get_target(TargetMode.CLOSEST,manual_target_position))
 
+func _on_stun_lichen_timer_timeout() -> void:
+	var stats: Dictionary
+	stats = {
+		"scale": get_stat("stun_lichen","scale"),
+		"stun_duration": get_stat("stun_lichen","stun_duration"),
+		"stun_damage": get_stat("stun_lichen","stun_damage"),
+		"stun_cooldown":get_stat("stun_lichen","stun_cooldown"),
+		"speed":get_stat("stun_lichen","speed"),
+		"life_time":get_stat("stun_lichen","life_time"),	
+		}
+	shoot(Gamedata.LICHENBULLET,stats,get_target(TargetMode.FARTHEST,manual_target_position))
 
+func try_death_summon_skill(summon_ID,position):
+	var stats: Dictionary
+	var samebullets =get_property("rafflesia_guardian","same_bullet",false)
+	var rate = get_stat("rafflesia_guardian", "rate")
+	#roll
+	var roll = randf()
+	if randf() > rate:
+		return  # échec → pas de spawn
+		
+	if samebullets:
+		stats = {
+		"max_bullet": get_stat("rafflesia_guardian","max_bullet"),
+		"max_turn": get_stat("rafflesia_guardian","max_turn"),
+		"bullet_range":get_stat("rafflesia_guardian","bullet_range"),
+		"bullet_speed":get_stat("rafflesia_guardian","bullet_speed"),
+		"same_bullet":get_property("rafflesia_guardian","same_bullet",false),	
+		"bullet_damage":get_stat("bullet","damage"),
+		"mode":get_property("bullet","mode",""),
+		"damage_per_tick": get_stat("bullet","damage_per_tick"),
+		"dot_duration": get_stat("bullet","dot_duration"),
+		"dot_rate": get_stat("bullet","dot_rate"),
+		"explosion_radius": get_stat("bullet","explosion_radius"),
+		"explosion_damage": get_stat("bullet","explosion_damage"),
+		"explosion_count": get_stat("bullet","explosion_count"),
+		"chain_explosion": get_property("bullet","chain_explosion",false),
+		"thorn_damage_storage":get_stat("bullet","thorn_damage_storage"),
+		"thorn_max_count":get_stat("bullet","thorn_max_count"),
+		"thorn_max_flat_damage":get_stat("bullet","thorn_max_flat_damage"),		
+		}
+	else:
+		stats = {
+		"max_bullet": get_stat("rafflesia_guardian","max_bullet"),
+		"max_turn": get_stat("rafflesia_guardian","max_turn"),
+		"bullet_range":get_stat("rafflesia_guardian","bullet_range"),
+		"bullet_speed":get_stat("rafflesia_guardian","bullet_speed"),
+		"same_bullet":get_property("rafflesia_guardian","same_bullet",false),	
+		"bullet_damage":get_stat("rafflesia_guardian","bullet_damage"),
+		"mode":"",
+		"damage_per_tick": 0,
+		"dot_duration": 0,
+		"dot_rate":0,
+		"explosion_radius": 0,
+		"explosion_damage": 0,
+		"explosion_count": 0,
+		"chain_explosion": false,
+		"thorn_damage_storage":0,
+		"thorn_max_count":0,
+		"thorn_max_flat_damage":0		
+			}
+
+	
+	var scene: PackedScene = get_summon_scene(summon_ID)
+	if scene == null:
+		return
+	var guardian = scene.instantiate()
+	get_tree().current_scene.add_child(guardian)
+	guardian.global_position = position
+	guardian.setup(position, stats)
+		
+func get_summon_scene(summon_ID: String) -> PackedScene:
+	match summon_ID:
+		"rafflesia_guardian":
+			return Gamedata.RAFFLESIA_GUARDIAN
+		_:
+			return null
 #endregion
 
 #region UPGRADES
@@ -304,6 +424,16 @@ func unlockSkill(skill_ID):
 		%leaf_storm_Timer.start()
 		#unlocked_skills[skill_ID]=skills
 		unlocked_skills[skill_ID] = {"scene": skills,"instance": skill_child_instance}
+	if skill_ID == "stun_lichen":
+		skills = Gamedata.STUNLICHEN
+		%stun_lichen_Timer.wait_time = get_stat("stun_lichen","stun_fire_rate")
+		%stun_lichen_Timer.start()
+		#unlocked_skills[skill_ID]=skills
+		unlocked_skills[skill_ID] = {"scene": skills,"instance": skill_child_instance}
+	if skill_ID == "rafflesia_guardian":
+		skills = Gamedata.STUNLICHEN
+		#unlocked_skills[skill_ID]=skills
+		unlocked_skills[skill_ID] = {"scene": skills,"instance": skill_child_instance}
 	if skill_ID == "sylv_shield":
 		skills = Gamedata.SYLV_SHIELD
 		skill_child_instance=skills.instantiate()
@@ -323,39 +453,89 @@ func upgradeSkill(base_skill: String, skill_upgrade: String, data_value) -> void
 		return
 	# mapping upgrade → stat impactée
 	var upgrade_map = {
+		#------------------------bullet------------------------
 		"bullet_fire_rate_plus":       { "stat": "fire_rate", "mode": "cumult" },
-		"bullet_damage_plus":       	{ "stat": "damage", "mode": "add" },
+		"bullet_damage_plus":       	{ "stat": "damage", "mode": "cumult" },
+		#fire mode
 		"bullet_fire_mode":       	{ "stat": "mode", "mode": "set" },
 		"bullet_fire_damage":       	{ "stat": "damage_per_tick", "mode": "cumult" },	
 		"bullet_fire_duration":       	{ "stat": "fire_duration", "mode": "cumult" },	
+		#explosionmode
 		"bullet_explosion_mode":       	{ "stat": "mode", "mode": "set" },
 		"bullet_explosion_damage_up":       	{ "stat": "explosion_damage", "mode": "add" },	
 		"bullet_explosion_radius_up":       	{ "stat": "explosion_radius", "mode": "add" },
-		"bullet_explosion_count_up":       	{ "stat": "explosion_count", "mode": "add" },	
+		"bullet_exploson_count_up":       	{ "stat": "explosion_count", "mode": "add" },	
+		#thornmode
 		"bullet_thorn_mode":       	{ "stat": "mode", "mode": "set" },
 		"bullet_thorn_damage_storage_up":       	{ "stat": "damage_storage", "mode": "cumult" },	
-		"bullet_thorn_max_count_up":       	{ "stat": "thorn_max_count", "mode": "add" },	
+		"bulletthorn_max_count_up":       	{ "stat": "thorn_max_count", "mode": "add" },	
+		#------------------------rootarea------------------------
 		"root_damage_up":       { "stat": "damage_per_tick", "mode": "cumult" },
 		"root_fire_rate_up":    { "stat": "fire_rate", "mode": "cumult" },
 		"root_radius_up":       { "stat": "radius", "mode": "add" },
 		"root_slow_up":         { "stat": "slow_percent", "mode": "cumult" },
+		#growth mode
+		"root_aura_growth_mode": {"stat": "mode", "mode": "set" },
+		"root_aura_growth_wave_up": {"stat": "overgrowth_level", "mode": "add" },
+		"root_aura_growth_kill_radius_up": {"stat": "overgrowth_kill_ratio", "mode": "add" },
+		"root_aura_growth_damage_up": {"stat": "overgrowth_damage", "mode": "cumult" },
+		"root_aura_growth_fire_rate_up": {"stat": "overgrowth_tickrate", "mode": "cumult" },
+		#binded mode
+		"root_aura_binding_mode": {"stat": "mode", "mode": "set" },
+		"root_aura_binding_damage_limit_up": {"stat": "binding_damage_limit", "mode": "add" },
+		"root_aura_binding_radius_up": {"stat": "binding_radius", "mode": "add" },
+		"root_aura_binding_ennemy_scale_up": {"stat": "binding_ennemy_scale", "mode": "cumult" },
+		"root_aura_binding_damage_up": {"stat": "binding_damage", "mode": "cumult" },
+		#------------------------wood_trunk------------------------
 		"wood_trunk_damage_up": { "stat": "damage", "mode": "cumult" },
-		"wood_trunk_speed_up":  { "stat": "speed",  "mode": "cumult" },		
-		"wood_trunk_size_up":  { "stat": "scale",  "mode": "cumult" },
+		"wood_trunk_range_up":  { "stat": "range",  "mode": "cumult" },		
+		"wood_trunk_size_up":  { "stat": "width",  "mode": "cumult" },
 		"wood_trunk_fire_rate_up":  { "stat": "fire_rate",  "mode": "cumult" },
+		#throwmode
+		"wood_trunk_throw_mode":{ "stat" : "mode" , "mode":"set"},
+		"wood_trunk_throw_fire_rate_up":{ "stat" : "throw_fire_rate","mode":"cumult"},
+		"wood_trunk_throw_push_growth_up":{ "stat" : "throw_growth_push_value","mode":"cumult"},
+		"wood_trunk_throw_push_damage_up":{ "stat" : "throw_growth_damage_value","mode":"cumult"},
+		"wood_trunk_throw_count_up":{ "stat" : "throw_count","mode":"add"},
+		#rockmode
+		"wood_trunk_rock_mode":{ "stat" : "mode","mode":"set"},
+		"wood_trunk_rock_scale_growth_up":{ "stat" : "rock_growth_scale","mode":"add"},
+		"wood_trunk_rock_damage_growth_up":{ "stat" : "rock_growth_damage_value","mode":"add"},
+		"wood_trunk_rock_base_scale_up":{ "stat" : "rock_scale","mode":"add"},
+		#------------------------vamp_sting------------------------
 		"vamp_sting_heal_up":   { "stat": "heal",   "mode": "cumult" },
 		"vamp_sting_speed_up":  { "stat": "speed",  "mode": "cumult" },
 		"vamp_sting_damage_up":  { "stat": "damage",  "mode": "cumult" },
 		"vamp_sting_fire_rate_up":  { "stat": "fire_rate",  "mode": "cumult" },
+		#------------------------sylv_bomb------------------------
 		"sylv_bomb_damage_up":  { "stat": "damage", "mode": "cumult" },
 		"sylv_bomb_radius_up":  { "stat": "radius", "mode": "cumult" },
 		"sylv_shield_tank":     { "stat": "max_hp", "mode": "cumult" },
 		"sylv_shield_speed_regen": { "stat": "regen", "mode": "cumult" },
+		"sylv_shield_reflect": { "stat": "reflect", "mode": "set" },
+		#------------------------leafstorm------------------------
 		"leaf_storm_damage_up":  { "stat": "damage",  "mode": "cumult" },
 		"leaf_storm_dot_up":  { "stat": "damage_per_tick",  "mode": "cumult" },
 		"leaf_storm_duration_up":  { "stat": "duration",  "mode": "cumult" },
 		"leaf_storm_dot_time_up":  { "stat": "dot_duration",  "mode": "cumult" },
-		"leaf_storm_width_up":  { "stat": "radius",  "mode": "cumult" },
+		"leaf_storm_width_up":  { "stat": "radius",  "mode": "cumult" },	
+		#razor mode	
+		"leaf_storm_razor_mode": { "stat": "mode", "mode": "set" },
+		"leaf_storm_razor_damage":{ "stat": "razor_damage", "mode": "cumult" },
+		"leaf_storm_razor_crit_up": { "stat": "razor_crit_rate", "mode": "add" },
+		"leaf_storm_razor_tick_rate_up": { "stat": "razor_tick_rate", "mode": "cumult" },
+		"leaf_storm_razor_duration_up": { "stat": "duration", "mode": "cumult" },
+		#sand mode
+		"leaf_storm_sand_mode": { "stat": "mode", "mode": "set" },
+		"leaf_storm_sand_tick_rate_up": { "stat": "sand_tick_rate", "mode": "cumult" },
+		"leaf_storm_sand_slow_up": { "stat": "sand_slow", "mode": "cumult" },
+		"leaf_storm_sand_debuff_duration_up": { "stat": "sand_debuff_duration", "mode": "cumult" },
+		"leaf_storm_sand_width_up": {"stat": "radius",  "mode": "cumult" },
+		#------------------------guardian rafflesia------------------------		
+		"rafflesia_guardian_max_bullet_up":  { "stat": "max_bullet",  "mode": "add" },
+		"rafflesia_guardian_turn_up":  { "stat": "max_turn",  "mode": "cumult" },
+		"rafflesia_guardian_rate_up":  { "stat": "rate",  "mode": "cumult" },
+		"rafflesia_guardian_bullet_params":  { "stat": "same_bullet",  "mode": "set" },		
 
 	}
 
@@ -416,6 +596,8 @@ func _update_skill_timer(skill):
 			t = %vamp_sting_Timer
 		"sylv_bomb":
 				t = %sylv_bomb_Timer
+		"stun_lichen":
+				t = %stun_lichen_Timer		
 		
 		_:
 			return # pas de timer associé
