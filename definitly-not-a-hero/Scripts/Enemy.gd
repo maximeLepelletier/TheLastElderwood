@@ -10,11 +10,12 @@ var current_hp:float
 var gold:int
 var xp:int
 var damage
+var attack_range=250
+
 #parametres
 var player
 var slowed_amount = 0.0
 var is_in_range = false
-var attack_range=250
 var timer_activated = false
 var direction
 @onready var death_area: Area2D = $deatharea
@@ -108,7 +109,11 @@ func take_damage(damage:float, damage_type: String,damage_source: Variant=null,c
 		if player.Tower.unlocked_skills.has("root_aura"):
 			bind_ratio = player.Tower.get_stat("root_aura","binding_damage_limit")
 		propagate_bind_damage(damage*bind_ratio)			
-		
+		var binding_reroll_limit = player.Tower.get_stat("root_aura","binding_reroll_limit")
+		if randf() < binding_reroll_limit:
+			await get_tree().create_timer(0.2,false).timeout	
+			propagate_bind_damage(damage*bind_ratio)			
+
 		
 	for mod in modifierinstances.duplicate():
 		if mod.has_method("on_hit"):
@@ -315,6 +320,7 @@ func init(enemy_id: String):
 		speed=base_speed
 		gold = stats["gold_reward"]
 		xp = stats["xp_reward"]
+		attack_range = stats["attack_range"]
 		weaknesses = stats.get("weaknesses", []).duplicate(true)
 		resistances = stats.get("resistances", []).duplicate(true)
 		player = get_tree().get_first_node_in_group("player")

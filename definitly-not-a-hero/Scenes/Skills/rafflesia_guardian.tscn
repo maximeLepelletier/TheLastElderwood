@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://deejv44cnnbq4"]
 
-[ext_resource type="Script" uid="uid://cfqv2e1ikxuyj" path="res://rafflesia_guardian.gd" id="1_wcdug"]
+[ext_resource type="Script" uid="uid://cfqv2e1ikxuyj" path="res://Scripts/skills/rafflesia_guardian.gd" id="1_wcdug"]
 [ext_resource type="Texture2D" uid="uid://dlycrf6tn78nj" path="res://Assets/Simple Shapes/Pentagon.png" id="2_7rv3h"]
 [ext_resource type="Texture2D" uid="uid://bq6suqqc8815w" path="res://Assets/Simple Shapes/Circle.png" id="3_0d5hr"]
 

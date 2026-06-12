@@ -31,6 +31,8 @@ Gamedata="*res://Scripts/data/gamedata.gd"
 Playerdata="*res://Scripts/data/playerdata.gd"
 DamageManager="*res://Scripts/managers/damage_manager.gd"
 Audiomanager="*uid://cxwffdacmnbve"
+BuffData="*uid://b4w7tjhlfyhap"
+StatFamilies="*uid://cut53lkx8tri4"
 
 [debug]
 

@@ -2,12 +2,7 @@
 "bullet_fire_rate_plus": {"type": "skill_upgrade", "target": "fire_rate", "requires": "bullet", "value": 0.1, "text": "Vitesse de tir +10%", "icon":"fire-rate.png"},
 "bullet_damage_plus": {"type": "skill_upgrade", "target": "damage", "requires": "bullet", "value": 0.2, "text": "Dégâts +20%","icon":"damageup.png"},
 
-"root_aura": {"type": "skill", "unique": true, "unlock": ["root_damage_up", "root_slow_up"],"text": "Racines épineuses : crée une zone de racines qui ralentit et inflige des dégâts."},
-
-"root_aura_binding_mode": {  "type": "skill_upgrade",  "target": "mode", "available" :1, "requires": "root_aura", "unlock":["root_aura_binding_damage_limit_up","root_aura_binding_radius_up","root_aura_binding_ennemy_scale_up","root_aura_binding_damage_up"], "value": "binding",  "text": "Mode symbiose : Les ennemis dans la zone partagent une partie des dégâts infligés par vos autres compétences."},
-"root_aura_binding_damage_limit_up": {  "type": "skill_upgrade", "available" :2,  "requires": "root_aura",  "mode_skill": "binding",  "value": 0.1,  "text": "Conscience collective :  le seuil des degats repartis augmententent de 10%"},
-"root_aura_binding_radius_up": {  "type": "skill_upgrade", "available" :3,  "requires": "root_aura",  "mode_skill": "binding",  "value": 0.25,  "text": "Proliferation cérébrale : la zone grandis de 25%"},
-"root_aura_binding_ennemy_scale_up": {  "type": "skill_upgrade",  "available" :2, "requires": "root_aura", "mode_skill": "binding",  "value": 0.02,  "text": "surcharge synaptique : pour chaque ennemis dans la zone augmente les degats partagés de 2%"},
-"root_aura_binding_damage_up": {  "type": "skill_upgrade",  "available" :2, "requires": "root_aura",  "mode_skill": "binding", "value": 0.3,  "text": "decharge mentale : augmentation des degats de la zone +30%"},
+"sylv_shield": {   "type": "skill",   "unique": true,   "unlock": ["sylv_shield_tank", "sylv_shield_speed_regen","sylv_shield_shockwave_mode"],   "text": "bouclier sylvestre : un bouclier protegant le gardien."},
+"sylv_shield_bloom_mode": {  "type": "skill_upgrade",  "target": "mode", "available" :1, "requires": "sylv_shield", "unlock":[], "value": "bloom",  "text": "plus le bouclier reste actif plus le joueur est renforcé"},
 
 }

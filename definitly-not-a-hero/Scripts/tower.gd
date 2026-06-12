@@ -17,6 +17,8 @@ var bonuses := {}
 var multipliers := {}
 var cumult := {}
 var properties:={}
+var active_buffs : Array = []
+var expired_buffs : Array = []
 #-------------------------------------------------------------------------#
 #CIBLAGE ENUMERATOR
 #-------------------------------------------------------------------------#
@@ -54,9 +56,9 @@ func _input(event: InputEvent) -> void:
 func get_world_target_position(manual_target) -> Vector2:	
 	return get_global_mouse_position()
 	
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	var TargetEnnemy = get_target(TargetMode.CLOSEST,manual_target_position)
-	update_rotation(TargetEnnemy, _delta)
+	update_rotation(TargetEnnemy, delta)
 	if TargetEnnemy == null or is_rotating:
 		%Timer.paused=true
 		%wood_trunk_Timer.paused=true
@@ -71,6 +73,15 @@ func _physics_process(_delta: float) -> void:
 		%sylv_bomb_Timer.paused=false
 		%leaf_storm_Timer.paused = false
 		%stun_lichen_Timer.paused = false
+	#gestion des buffs
+	for buff in active_buffs:
+		if buff.time_left ==-1:
+			continue
+		buff.time_left -= delta
+		if buff.time_left <= 0:
+			expired_buffs.append(buff.name)
+		for buff_name in expired_buffs:
+			remove_dynamic_buff(buff_name)
 
 func get_target(mode: TargetMode, origin: Vector2) -> TargetData:
 	var t :TargetData
@@ -438,9 +449,9 @@ func unlockSkill(skill_ID):
 		skills = Gamedata.SYLV_SHIELD
 		skill_child_instance=skills.instantiate()
 		add_child(skill_child_instance)
-		#unlocked_skills[skill_ID]=skills
 		unlocked_skills[skill_ID] = {"scene": skills,"instance": skill_child_instance}
-		Events.shield_unlock.emit(get_stat("sylv_shield","max_hp"),get_stat("sylv_shield","regen"))
+		#instance du shield
+		skill_child_instance.setup(self)#on attribue la tour pour piocher les stats
 	if not skill_upgrades_count.has(skill_ID):
 		skill_upgrades_count[skill_ID] = 0
 		
@@ -510,9 +521,18 @@ func upgradeSkill(base_skill: String, skill_upgrade: String, data_value) -> void
 		#------------------------sylv_bomb------------------------
 		"sylv_bomb_damage_up":  { "stat": "damage", "mode": "cumult" },
 		"sylv_bomb_radius_up":  { "stat": "radius", "mode": "cumult" },
+		#------------------------sylv_shield------------------------
 		"sylv_shield_tank":     { "stat": "max_hp", "mode": "cumult" },
 		"sylv_shield_speed_regen": { "stat": "regen", "mode": "cumult" },
-		"sylv_shield_reflect": { "stat": "reflect", "mode": "set" },
+		#shockwave mode
+		"sylv_shield_shockwave_mode": { "stat": "mode", "mode": "set" },
+		"sylv_shield_shockwave_damage_limit_up":{ "stat": "shockwave_damage_limit", "mode": "cumult" }, 
+		"sylv_shield_shockwave_damage_incremental_up":{  "stat": "shockwave_damage_incremental", "mode": "add" },
+		"sylv_shield_shockwave_radius_up":{  "stat": "shockwave_radius", "mode": "cumult" },
+		"sylv_shield_shockwave_max_hp_up":{  "stat": "shockwave_max_hp", "mode": "cumult" },
+		"sylv_shield_shockwave_cooldown_up":{  "stat": "shockwave_cooldown", "mode": "cumult" },
+		#bloom
+		"sylv_shield_bloom_mode": { "stat": "mode", "mode": "set" },	
 		#------------------------leafstorm------------------------
 		"leaf_storm_damage_up":  { "stat": "damage",  "mode": "cumult" },
 		"leaf_storm_dot_up":  { "stat": "damage_per_tick",  "mode": "cumult" },
@@ -566,14 +586,7 @@ func _apply_stat_upgrade(skill: String, stat: String, mode: String, value) -> vo
 				properties[skill] = {}
 			properties[skill][stat] = value
 
-		
-	# refresh UI / shield si besoin
-	if skill == "sylv_shield":
-		Events.update_shield.emit(
-			get_stat("sylv_shield", "max_hp"),
-			get_stat("sylv_shield", "current_HP"), # ou current hp
-			get_stat("sylv_shield", "regen")
-		)
+
 		# update Timer si la stat est fire_rate
 	if stat == "fire_rate":
 		_update_skill_timer(skill)
@@ -607,11 +620,20 @@ func _update_skill_timer(skill):
 		if t.is_stopped():
 			t.start()
 
-func applySuperSkill(base_skill,super_skill_upgrade,data_value):
-	print("skill de base ! ", base_skill)
-	print("SUPER POWER-UP ! ", super_skill_upgrade)
-	print("valeur du super_skill", data_value)
+#func add_dynamic_buff(buff_name: String,duration:float=-1):
+	#if !BuffData.DATA.has(buff_name):
+		#return
+	#active_buffs.append(BuffData.DATA[buff_name].duplicate())
 	
+func add_dynamic_buff(buff_name: String,duration:float=-1):
+	if !BuffData.DATA.has(buff_name):
+		return
+	active_buffs.append({"name":buff_name,"time_left":duration})
+	
+func remove_dynamic_buff(buff_name: String):
+		active_buffs = active_buffs.filter(
+		func(buff):
+			return buff.name != buff_name)
 #endregion
 
 
@@ -621,6 +643,7 @@ func get_stat(skill: String, stat: String) -> float:
 		bonuses,
 		cumult,
 		multipliers,
+		active_buffs,
 		skill,
 		stat
 	)
@@ -634,3 +657,7 @@ func _refresh_skill(skill: String) -> void:
 			var aura = unlocked_skills["root_aura"].instance
 			if aura :
 				aura._refresh_from_tower()
+		if skill=="sylv_shield":
+			var shield = unlocked_skills["sylv_shield"].instance
+			if shield :
+				shield._refresh_from_tower()

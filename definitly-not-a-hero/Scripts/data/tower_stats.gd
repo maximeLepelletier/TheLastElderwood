@@ -68,11 +68,17 @@ class_name TowerStats
 	},
 	"sylv_shield": {
 		"instance":Gamedata.SYLV_SHIELD,
-		"max_hp": 100,
-		"current_HP": 100,
-		"regen": 5,
-		"radius":1,
-		"mode": ""
+		"shield_max_hp": 100,
+		"shield_regen": 5,
+		"shield_regen_interval":5,
+		"mode": "",
+		"shockwave_damage_incremental":0.5,
+		"shockwave_damage_limit":10,
+		"shockwave_radius":1.2,
+		"shockwave_speed":3.5,
+		"shockwave_max_hp":50,
+		"shockwave_current_hp":50,
+		"shockwave_cooldown":12
 	},
 	"root_aura": {
 		"instance":Gamedata.ROOT_AURA,
@@ -91,6 +97,7 @@ class_name TowerStats
 		"binding_radius":4,
 		"binding_damage":2,
 		"binding_ennemy_scale":0,
+		"binding_reroll_limit":0
 
 	},
 	"leaf_storm": {

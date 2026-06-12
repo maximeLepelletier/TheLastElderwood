@@ -17,6 +17,7 @@ var overgrowth_radius :float =0
 var overgrowth_level :float =0
 var overgrowth_scale_damage :float =0
 
+
 @onready var timer: Timer = $Timer
 
 func setup(tower: Node) -> void:	
@@ -62,7 +63,7 @@ func convert_to_growth():
 
 func convert_to_binding():
 	damage_per_tick = owner_tower.get_stat("root_aura", "binding_damage") 
-	tick_rate = owner_tower.get_stat("root_aura", "tickrate")	
+	tick_rate = owner_tower.get_stat("root_aura", "fire_rate")	
 	radius = owner_tower.get_stat("root_aura", "binding_radius") 
 	scale.x = radius
 	scale.y = radius

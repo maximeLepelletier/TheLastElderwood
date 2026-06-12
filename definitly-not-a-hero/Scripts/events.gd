@@ -9,8 +9,9 @@ signal leveling_up
 signal enemy_died_signal(gold: int, xp: int)
 signal enemy_died()
 signal shield_unlock
-signal update_shield(shield_hp)
-signal shield_heal (shield_current_hp)
+signal shield_changed
+signal shield_broken
+signal shield_restored
 signal growth_root
 #UI event
 
